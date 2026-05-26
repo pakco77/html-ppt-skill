@@ -224,6 +224,5 @@ MIT. Copyright (c) 2026 lewis &lt;sudolewis@gmail.com&gt;.
 
 This is a fork of [lewislulu/html-ppt-skill](https://github.com/lewislulu/html-ppt-skill).
 Fork maintainer: [@pakco77](https://github.com/pakco77) — adds an interactive
-style-picker WebUI, the `sainstore` theme, and 3 corporate full-deck templates
-(`sainstore`, `reliable-traits`, `office-security-training`) on top of the
-upstream work.
+style-picker WebUI, the `sainstore` theme, and the `sainstore` brand full-deck
+template on top of the upstream work.

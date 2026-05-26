@@ -5,7 +5,7 @@
 [![Upstream forks](https://img.shields.io/github/forks/lewislulu/html-ppt-skill?label=upstream%20forks&style=social)](https://github.com/lewislulu/html-ppt-skill/network/members)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-> 🙏 **All credit to [@lewislulu](https://github.com/lewislulu)** — this fork only adds a WebUI picker, 1 theme, and 3 corporate decks on top of his work.
+> 🙏 **All credit to [@lewislulu](https://github.com/lewislulu)** — this fork only adds a WebUI picker, 1 theme, and 1 brand deck on top of his work.
 
 > A world-class AgentSkill for producing professional HTML presentations in
 > **37 themes**, **16 full-deck templates**, **31 page layouts**,
@@ -25,7 +25,7 @@
 > This fork adds three small things on top:
 >
 > - 🎨 **Interactive WebUI** — `templates/style-picker.html`: browse themes × layouts × full-decks visually, copy install/usage commands in one click.
-> - 🏢 **+1 theme & +3 corporate decks** — `sainstore` theme, plus `sainstore` / `reliable-traits` / `office-security-training` full-deck templates.
+> - 🏢 **+1 theme & +1 brand deck** — `sainstore` theme, plus `sainstore` full-deck template.
 > - 🐛 **Stability fixes** for `presenter-mode-reveal`.
 >
 > Positioning: a slightly more turn-key experience than the upstream skill, but **far lighter than html-anything** — no extra runtime, still pure static HTML/CSS/JS, no build step.

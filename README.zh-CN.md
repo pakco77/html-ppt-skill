@@ -5,7 +5,7 @@
 [![上游 forks](https://img.shields.io/github/forks/lewislulu/html-ppt-skill?label=%E4%B8%8A%E6%B8%B8%20forks&style=social)](https://github.com/lewislulu/html-ppt-skill/network/members)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-> 🙏 **核心功劳全部归 [@lewislulu](https://github.com/lewislulu)** —— 本 fork 只是在他的作品之上加了一个 WebUI 选择器、1 套主题和 3 套企业 deck。
+> 🙏 **核心功劳全部归 [@lewislulu](https://github.com/lewislulu)** —— 本 fork 只是在他的作品之上加了一个 WebUI 选择器、1 套主题和 1 套品牌 deck。
 
 > 一款专业级的 AgentSkill，让 AI 做出真正能打的 HTML 演示文稿。
 > **37 套主题**、**16 套完整 deck 模板**、**31 种页面布局**、**47 个动效**
@@ -24,7 +24,7 @@
 > 本 fork 在原作之上做了三件小事：
 >
 > - 🎨 **交互式 WebUI** —— `templates/style-picker.html`：可视化浏览 主题 × 布局 × 完整 deck，一键复制安装命令与使用提示语。
-> - 🏢 **新增 1 主题 + 3 企业 deck** —— `sainstore` 主题，外加 `sainstore` / `reliable-traits` / `office-security-training` 三套完整 deck。
+> - 🏢 **新增 1 主题 + 1 品牌 deck** —— `sainstore` 主题，外加 `sainstore` 一套完整 deck。
 > - 🐛 修复 `presenter-mode-reveal` 的若干稳定性问题。
 >
 > 定位：在原 skill 之上**多了一点 WebUI 体验和几套公司模板**，但**比 html-anything 轻得多** —— 不引入额外运行时，仍是纯静态 HTML/CSS/JS，无需构建。

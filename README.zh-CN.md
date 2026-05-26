@@ -1,4 +1,4 @@
-# html-ppt · HTML PPT 工作室
+# html-ppt-skill · 加了 WebUI 选择器和企业模板
 
 [![Fork 自 lewislulu/html-ppt-skill](https://img.shields.io/badge/fork%20%E8%87%AA-lewislulu%2Fhtml--ppt--skill-blue?logo=github)](https://github.com/lewislulu/html-ppt-skill)
 [![上游 stars](https://img.shields.io/github/stars/lewislulu/html-ppt-skill?label=%E4%B8%8A%E6%B8%B8%20stars&style=social)](https://github.com/lewislulu/html-ppt-skill/stargazers)

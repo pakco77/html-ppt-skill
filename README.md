@@ -1,4 +1,4 @@
-# html-ppt — HTML PPT Studio
+# html-ppt-skill — *with WebUI Picker & Corporate Decks*
 
 [![Forked from lewislulu/html-ppt-skill](https://img.shields.io/badge/forked%20from-lewislulu%2Fhtml--ppt--skill-blue?logo=github)](https://github.com/lewislulu/html-ppt-skill)
 [![Upstream stars](https://img.shields.io/github/stars/lewislulu/html-ppt-skill?label=upstream%20stars&style=social)](https://github.com/lewislulu/html-ppt-skill/stargazers)

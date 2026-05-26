@@ -1,5 +1,12 @@
 # html-ppt · HTML PPT 工作室
 
+[![Fork 自 lewislulu/html-ppt-skill](https://img.shields.io/badge/fork%20%E8%87%AA-lewislulu%2Fhtml--ppt--skill-blue?logo=github)](https://github.com/lewislulu/html-ppt-skill)
+[![上游 stars](https://img.shields.io/github/stars/lewislulu/html-ppt-skill?label=%E4%B8%8A%E6%B8%B8%20stars&style=social)](https://github.com/lewislulu/html-ppt-skill/stargazers)
+[![上游 forks](https://img.shields.io/github/forks/lewislulu/html-ppt-skill?label=%E4%B8%8A%E6%B8%B8%20forks&style=social)](https://github.com/lewislulu/html-ppt-skill/network/members)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
+> 🙏 **核心功劳全部归 [@lewislulu](https://github.com/lewislulu)** —— 本 fork 只是在他的作品之上加了一个 WebUI 选择器、1 套主题和 3 套企业 deck。
+
 > 一款专业级的 AgentSkill，让 AI 做出真正能打的 HTML 演示文稿。
 > **37 套主题**、**16 套完整 deck 模板**、**31 种页面布局**、**47 个动效**
 > (27 个 CSS + 20 个 Canvas FX)，加上全新的 **演讲者模式** —— 像素级

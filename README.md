@@ -1,5 +1,12 @@
 # html-ppt — HTML PPT Studio
 
+[![Forked from lewislulu/html-ppt-skill](https://img.shields.io/badge/forked%20from-lewislulu%2Fhtml--ppt--skill-blue?logo=github)](https://github.com/lewislulu/html-ppt-skill)
+[![Upstream stars](https://img.shields.io/github/stars/lewislulu/html-ppt-skill?label=upstream%20stars&style=social)](https://github.com/lewislulu/html-ppt-skill/stargazers)
+[![Upstream forks](https://img.shields.io/github/forks/lewislulu/html-ppt-skill?label=upstream%20forks&style=social)](https://github.com/lewislulu/html-ppt-skill/network/members)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
+> 🙏 **All credit to [@lewislulu](https://github.com/lewislulu)** — this fork only adds a WebUI picker, 1 theme, and 3 corporate decks on top of his work.
+
 > A world-class AgentSkill for producing professional HTML presentations in
 > **37 themes**, **16 full-deck templates**, **31 page layouts**,
 > **47 animations** (27 CSS + 20 canvas FX), and a **true presenter mode**

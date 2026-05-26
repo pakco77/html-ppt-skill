@@ -92,7 +92,7 @@ All themes define the same variables: `--bg`, `--bg-soft`, `--surface`,
 
 | name | description | when to use |
 |---|---|---|
-| `sainstore` | 暖米底 + SainStore 红 #E7380D / 蓝 #1D7FB7 / 黄 #F5AB18 三色 + Inter / 思源黑体。 | SainStore / Genmitsu 品牌内部周报、产品发布、培训材料 |
+| `sainstore` | 暖米底 + SainStore 红 #E7380D / 蓝 #1D7FB7 / 黄 #F5AB18 三色 + Inter / 思源黑体。 | SainStore / Genmitsu 品牌内部汇报、产品发布、培训材料 |
 
 ## How to apply
 

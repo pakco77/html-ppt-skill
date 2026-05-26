@@ -1,4 +1,4 @@
-# SainStore Weekly Report
+# SainStore Report
 
 基于 `weekly-report` 改造的 SainStore 品牌 deck，遵循 SainStore 视觉 DNA。
 

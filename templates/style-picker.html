@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -17,7 +17,7 @@
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
   header .brand .sub{color:#8a90a4;font-size:12px;margin-top:2px}
 
-  /* 中间安装命令 */
+  /* Middle install command */
   .install{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);
     border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:6px 6px 6px 14px;
     font-family:'JetBrains Mono','SFMono-Regular',monospace;font-size:13px;color:#cfd4e2;
@@ -30,133 +30,123 @@
   .install button:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(167,139,250,.4)}
   .install button.ok{background:#1aaf6c}
 
-  /* 右上控件 */
+  /* Top-right controls */
   .controls{display:flex;gap:10px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
   .controls input[type=search]{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
     color:#e8ebf4;padding:8px 14px;border-radius:8px;font-size:13px;width:200px;outline:none}
   .controls input[type=search]:focus{border-color:#a78bfa}
-  .controls .size-toggle{display:flex;background:rgba(255,255,255,.05);border-radius:8px;padding:3px}
-  .controls .size-toggle button{padding:6px 12px;font-size:12px;color:#aab0c0;background:transparent;
-    border:0;border-radius:6px;cursor:pointer}
-  .controls .size-toggle button.active{background:rgba(255,255,255,.12);color:#fff}
+  .controls .size-toggle,.controls .lang-toggle{display:flex;background:rgba(255,255,255,.05);border-radius:8px;padding:3px}
+  .controls .size-toggle button,.controls .lang-toggle button{padding:6px 12px;font-size:12px;color:#aab0c0;background:transparent;
+    border:0;border-radius:6px;cursor:pointer;font-family:'Inter','PingFang SC',sans-serif;font-weight:600}
+  .controls .size-toggle button.active,.controls .lang-toggle button.active{background:rgba(255,255,255,.12);color:#fff}
+  .controls .lang-toggle button.active{background:linear-gradient(135deg,#a78bfa 0%,#f472b6 100%);color:#fff}
 
   /* Tabs */
   .tabs{grid-column:1/-1;display:flex;gap:4px;background:rgba(255,255,255,.05);padding:4px;
     border-radius:10px;width:fit-content;margin:0 auto;margin-top:4px}
   .tab{padding:9px 22px;font-size:13px;font-weight:600;color:#aab0c0;border:0;background:transparent;
-    border-radius:7px;cursor:pointer;transition:.15s}
+    border-radius:7px;cursor:pointer;transition:.15s;font-family:'Inter','PingFang SC',sans-serif}
   .tab.active{background:#fff;color:#0b0c10}
   .tab:not(.active):hover{color:#fff;background:rgba(255,255,255,.08)}
 
-  /* Grid */
-  main{padding:28px 32px 80px}
-  .grid{display:grid;gap:22px}
-  .grid.size-s{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
-  .grid.size-m{grid-template-columns:repeat(auto-fill,minmax(380px,1fr))}
-  .grid.size-l{grid-template-columns:repeat(auto-fill,minmax(520px,1fr))}
+  /* Grid + Card */
+  main{padding:24px 32px 64px}
+  .grid{display:grid;gap:16px}
+  .grid.size-s{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+  .grid.size-m{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+  .grid.size-l{grid-template-columns:repeat(auto-fill,minmax(440px,1fr))}
+  .card{background:#13141a;border:1px solid rgba(255,255,255,.08);border-radius:12px;
+    overflow:hidden;transition:.2s;cursor:pointer;position:relative}
+  .card:hover{transform:translateY(-2px);border-color:rgba(167,139,250,.4);
+    box-shadow:0 12px 30px rgba(0,0,0,.4)}
+  .card.copied{border-color:#1aaf6c;box-shadow:0 0 0 2px rgba(26,175,108,.3)}
+  .preview{aspect-ratio:16/10;background:#fff;position:relative;overflow:hidden}
+  .preview iframe{position:absolute;inset:0;width:166.67%;height:166.67%;border:0;
+    transform:scale(.6);transform-origin:0 0;pointer-events:none}
+  .preview .badge{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.7);color:#fff;
+    font-size:10px;padding:2px 8px;border-radius:4px;font-weight:600;z-index:2}
+  .preview .badge.scenario{background:rgba(167,139,250,.85)}
+  .preview .badge.extracted{background:rgba(244,114,182,.85)}
 
-  .card{background:#11131a;border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;
-    transition:.2s;cursor:pointer;display:flex;flex-direction:column;position:relative}
-  .card:hover{border-color:rgba(167,139,250,.5);transform:translateY(-2px);
-    box-shadow:0 18px 40px rgba(0,0,0,.4)}
-  /* 复制按钮（右上角，独立点击不冒泡） */
-  .card .copy-btn{position:absolute;top:10px;left:10px;z-index:12;
-    display:inline-flex;align-items:center;gap:6px;
-    padding:6px 12px;border-radius:999px;border:0;cursor:pointer;
-    background:rgba(11,12,16,.78);color:#fff;font-size:11px;font-weight:600;
-    letter-spacing:.04em;backdrop-filter:blur(8px);
-    box-shadow:0 4px 12px rgba(0,0,0,.4);
-    opacity:0;transform:translateY(-4px);transition:.18s;
-    font-family:'Inter',sans-serif}
-  .card:hover .copy-btn{opacity:1;transform:translateY(0)}
-  .card .copy-btn:hover{background:rgba(167,139,250,.9)}
-  .card.copied .copy-btn{opacity:1;transform:translateY(0);background:#1aaf6c}
-  /* 右下角放大提示 */
-  .card .zoom-hint{position:absolute;bottom:78px;right:10px;z-index:11;
-    padding:5px 10px;border-radius:6px;font-size:10px;letter-spacing:.06em;
-    background:rgba(11,12,16,.7);color:#cfd4e2;backdrop-filter:blur(6px);
-    opacity:0;transition:.18s;pointer-events:none;font-family:'JetBrains Mono',monospace}
+  /* Copy button on each card (no propagation) */
+  .copy-btn{position:absolute;top:8px;right:8px;z-index:3;background:rgba(167,139,250,.85);
+    color:#fff;border:0;padding:5px 11px;border-radius:6px;font-size:11px;font-weight:600;
+    cursor:pointer;font-family:'Inter','PingFang SC',sans-serif;opacity:0;transition:.15s}
+  .card:hover .copy-btn{opacity:1}
+  .copy-btn:hover{background:#a78bfa;transform:scale(1.05)}
+  .copy-btn.ok{background:#1aaf6c;opacity:1}
+
+  /* Zoom hint bottom-right */
+  .zoom-hint{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.6);color:#fff;
+    font-size:10px;padding:3px 8px;border-radius:4px;opacity:0;transition:.15s;pointer-events:none;
+    font-family:'JetBrains Mono',monospace;letter-spacing:.05em}
   .card:hover .zoom-hint{opacity:1}
-  .preview{position:relative;background:#fff;aspect-ratio:16/9;overflow:hidden}
-  .preview iframe{position:absolute;top:0;left:0;width:200%;height:200%;border:0;
-    transform:scale(.5);transform-origin:top left;pointer-events:none}
-  .preview .badge{position:absolute;top:10px;right:10px;padding:4px 10px;border-radius:999px;
-    background:rgba(0,0,0,.55);color:#fff;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
-    font-family:'JetBrains Mono',monospace;backdrop-filter:blur(6px);z-index:10}
-  .preview .badge.extracted{background:rgba(96,165,250,.7)}
-  .preview .badge.scenario{background:rgba(167,139,250,.7)}
-  .meta{padding:14px 18px 16px;border-top:1px solid rgba(255,255,255,.05)}
-  .meta .name{font-size:15px;font-weight:700;color:#fff;margin:0 0 4px;letter-spacing:-.005em}
-  .meta .desc{font-size:12px;color:#8a90a4;margin:0;line-height:1.5}
-  .meta .id{font-family:'JetBrains Mono',monospace;font-size:11px;color:#6a7086;margin-top:6px}
 
-  .empty{padding:60px 20px;text-align:center;color:#6a7086;font-size:14px}
+  .meta{padding:12px 14px}
+  .meta .name{margin:0;font-size:13px;font-weight:700;letter-spacing:-.01em}
+  .meta .desc{margin:4px 0 0;font-size:11px;color:#8a90a4;line-height:1.5}
+  .meta .id{margin:6px 0 0;font-size:10px;color:#5a6076;font-family:'JetBrains Mono',monospace}
+  .empty{padding:80px 20px;text-align:center;color:#5a6076}
 
-  /* Modal 放大预览 */
-  .modal{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:100;display:none;
-    align-items:center;justify-content:center;padding:40px}
+  /* Modal */
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);
+    z-index:100;display:none;align-items:center;justify-content:center;padding:32px}
   .modal.open{display:flex}
-  .modal-wrap{position:relative;width:min(1280px,100%);height:min(720px,100%)}
-  .modal-inner{background:#fff;width:100%;height:100%;
-    border-radius:14px;overflow:hidden;position:relative;box-shadow:0 40px 100px rgba(0,0,0,.6)}
+  .modal-wrap{position:relative;width:min(1280px,95vw);aspect-ratio:16/10;max-height:90vh;
+    background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.6)}
+  .modal-inner{position:absolute;inset:0}
   .modal-inner iframe{width:100%;height:100%;border:0;display:block}
-  .modal-close{position:absolute;top:-44px;right:0;background:rgba(255,255,255,.1);color:#fff;
-    border:0;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:20px}
-  .modal-close:hover{background:rgba(255,255,255,.2)}
-  .modal-name{position:absolute;top:-44px;left:0;color:#e8ebf4;font-size:14px;
-    font-family:'JetBrains Mono',monospace}
-  .modal-copy{position:absolute;top:-44px;right:50px;background:linear-gradient(135deg,#a78bfa,#f472b6);
-    color:#fff;border:0;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:12px;
-    font-weight:600;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:6px}
-  .modal-copy:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(167,139,250,.4)}
+  .modal-close{position:absolute;top:14px;right:14px;z-index:5;background:rgba(0,0,0,.7);color:#fff;
+    border:0;width:36px;height:36px;border-radius:18px;cursor:pointer;font-size:18px;line-height:1}
+  .modal-close:hover{background:rgba(0,0,0,.95)}
+  .modal-copy{position:absolute;top:14px;right:60px;z-index:5;background:rgba(167,139,250,.95);color:#fff;
+    border:0;height:36px;padding:0 14px;border-radius:18px;cursor:pointer;font-size:13px;font-weight:600;
+    font-family:'Inter','PingFang SC',sans-serif;display:inline-flex;align-items:center;gap:6px;transition:.15s}
+  .modal-copy:hover{background:#a78bfa;transform:translateY(-1px)}
   .modal-copy.ok{background:#1aaf6c}
+  .modal-name{position:absolute;top:14px;left:14px;z-index:5;background:rgba(0,0,0,.7);color:#fff;
+    padding:8px 16px;border-radius:18px;font-size:13px;font-weight:600;
+    font-family:'Inter','PingFang SC',sans-serif}
 
   /* Toast */
-  .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);
-    background:#1aaf6c;color:#fff;padding:14px 24px;border-radius:12px;
-    box-shadow:0 18px 40px rgba(0,0,0,.5);font-size:14px;font-weight:600;z-index:200;
-    opacity:0;transition:.3s;pointer-events:none;display:flex;align-items:center;gap:10px}
+  .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:rgba(26,175,108,.95);color:#fff;padding:12px 24px;border-radius:24px;
+    font-size:13px;font-weight:600;font-family:'Inter','PingFang SC',sans-serif;
+    box-shadow:0 12px 30px rgba(26,175,108,.4);opacity:0;pointer-events:none;transition:.3s;z-index:200;
+    display:flex;align-items:center;gap:8px;max-width:90vw}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-  .toast .icon{font-size:18px}
+  .toast .icon{font-size:16px}
 
-  /* 使用说明页 */
-  .guide{max-width:920px;margin:0 auto;padding:8px 4px 0}
-  .guide h2{font-size:22px;margin:36px 0 14px;color:#fff;letter-spacing:-.01em;
-    display:flex;align-items:center;gap:10px}
-  .guide h2 .num{display:inline-flex;align-items:center;justify-content:center;
-    width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#a78bfa,#f472b6);
-    font-size:14px;font-weight:800;color:#fff}
-  .guide h2:first-child{margin-top:0}
-  .guide p,.guide li{color:#aab0c0;line-height:1.7;font-size:14px}
-  .guide ul{padding-left:22px;margin:8px 0}
-  .guide .block{background:#11131a;border:1px solid rgba(255,255,255,.08);
-    border-radius:12px;padding:18px 22px;margin:14px 0}
-  .guide code,.guide .cmd{font-family:'JetBrains Mono',monospace;font-size:13px;
-    background:rgba(167,139,250,.12);color:#cfd4e2;padding:2px 7px;border-radius:5px}
-  .guide .cmd-block{display:flex;align-items:center;gap:10px;background:#0d0f14;
-    border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 14px;margin:10px 0;
-    font-family:'JetBrains Mono',monospace;font-size:13px;color:#e8ebf4}
+  /* Guide */
+  .guide{max-width:980px;margin:0 auto;padding:24px 0;color:#cfd4e2;line-height:1.7;font-size:14px}
+  .guide h2{font-size:22px;font-weight:800;margin:32px 0 14px;letter-spacing:-.01em;display:flex;align-items:center;gap:12px}
+  .guide h2 .num{display:inline-flex;width:30px;height:30px;border-radius:50%;
+    background:linear-gradient(135deg,#a78bfa 0%,#f472b6 100%);color:#fff;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .guide p{margin:0 0 12px;color:#aab0c0}
+  .guide ul{margin:0 0 16px;padding-left:24px;color:#aab0c0}
+  .guide ul li{margin:4px 0}
+  .guide code{background:rgba(255,255,255,.08);padding:2px 7px;border-radius:4px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:#f472b6}
+  .guide .block{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+    border-radius:10px;padding:18px 22px;margin:14px 0}
+  .guide .cmd-block{background:#0a0b0f;border:1px solid rgba(255,255,255,.08);border-radius:10px;
+    padding:14px 18px;margin:14px 0;font-family:'JetBrains Mono',monospace;display:flex;
+    align-items:center;gap:10px}
   .guide .cmd-block .prompt{color:#6a7086}
-  .guide .cmd-block code{background:transparent;padding:0;color:#e8ebf4;flex:1;
-    white-space:pre-wrap;word-break:break-all}
-  .guide .cmd-block button{background:rgba(167,139,250,.2);color:#cfd4e2;border:1px solid rgba(167,139,250,.3);
-    padding:5px 12px;border-radius:6px;cursor:pointer;font-size:11px;font-weight:600;
-    font-family:'Inter',sans-serif}
-  .guide .cmd-block button:hover{background:rgba(167,139,250,.35);color:#fff}
-  .guide .cmd-block button.ok{background:#1aaf6c;color:#fff;border-color:#1aaf6c}
-  .guide .example{border-left:3px solid #a78bfa;padding:6px 0 6px 14px;margin:10px 0;
-    color:#e8ebf4;font-size:14px;font-style:italic}
-  .guide table{width:100%;border-collapse:collapse;margin:8px 0}
-  .guide table td{padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.06);font-size:13px}
-  .guide table td:first-child{font-family:'JetBrains Mono',monospace;color:#a78bfa;
-    width:200px;font-weight:600}
-  .guide table td:last-child{color:#aab0c0}
-  .guide a{color:#a78bfa;text-decoration:none;border-bottom:1px dashed rgba(167,139,250,.4)}
-  .guide a:hover{color:#f472b6;border-bottom-color:#f472b6}
-  .guide .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
-  .guide .links a{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;
-    background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);border-radius:8px;
-    border-bottom:1px solid rgba(167,139,250,.3);font-size:13px;font-weight:600}
+  .guide .cmd-block code{background:transparent;padding:0;color:#e8ebf4;font-size:13px;flex:1}
+  .guide .cmd-block button{background:linear-gradient(135deg,#a78bfa 0%,#f472b6 100%);color:#fff;border:0;
+    padding:6px 16px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;
+    font-family:'Inter','PingFang SC',sans-serif}
+  .guide .cmd-block button.ok{background:#1aaf6c}
+  .guide table{width:100%;border-collapse:collapse;margin:14px 0;background:rgba(255,255,255,.03);border-radius:8px;overflow:hidden}
+  .guide table td{padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.06);font-size:13px;vertical-align:top}
+  .guide table td:first-child{font-family:'JetBrains Mono',monospace;color:#f472b6;width:38%;white-space:nowrap}
+  .guide table tr:last-child td{border-bottom:0}
+  .guide .example{background:rgba(167,139,250,.08);border-left:3px solid #a78bfa;padding:8px 14px;margin:6px 0;
+    font-size:13px;color:#cfd4e2;border-radius:0 6px 6px 0}
+  .guide .links{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+  .guide .links a{color:#a78bfa;text-decoration:none;background:rgba(167,139,250,.1);
+    border:1px solid rgba(167,139,250,.3);padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;transition:.15s}
   .guide .links a:hover{background:rgba(167,139,250,.2);border-color:#a78bfa;transform:translateY(-1px)}
 
   @media (max-width:920px){
@@ -172,46 +162,50 @@
 <header>
   <div class="brand">
     <h1>HTML-PPT-Skill <span class="accent">· WebUI Picker</span></h1>
-    <div class="sub">37 主题 · 16 完整 Deck · 给 Agent 一句话直接生成 PPT · <a href="https://github.com/lewislulu/html-ppt-skill" target="_blank" style="color:#8a90a4;text-decoration:underline">fork from @lewislulu</a></div>
+    <div class="sub" id="brand-sub"></div>
   </div>
 
-  <div class="install" id="install-bar" title="点击复制安装命令">
+  <div class="install" id="install-bar">
     <span class="prompt">$</span>
     <code id="install-cmd">npx skills add https://github.com/pakco77/html-ppt-skill</code>
-    <button id="install-copy">复制</button>
+    <button id="install-copy"></button>
   </div>
 
   <div class="controls">
-    <input type="search" id="search" placeholder="搜索名称…">
+    <input type="search" id="search">
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button data-lang="zh" class="active">中</button>
+      <button data-lang="en">EN</button>
+    </div>
     <div class="size-toggle">
-      <button data-size="s">小</button>
-      <button data-size="m" class="active">中</button>
-      <button data-size="l">大</button>
+      <button data-size="s"></button>
+      <button data-size="m" class="active"></button>
+      <button data-size="l"></button>
     </div>
   </div>
 
-  <div class="tabs">
-    <button class="tab active" data-view="themes">🎨 主题 (37)</button>
-    <button class="tab" data-view="decks">📑 模板 (16)</button>
-    <button class="tab" data-view="guide">📖 使用说明</button>
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-view="themes"></button>
+    <button class="tab" data-view="decks"></button>
+    <button class="tab" data-view="guide"></button>
   </div>
 </header>
 
 <main>
   <div id="grid" class="grid size-m"></div>
-  <div id="empty" class="empty" style="display:none">没有匹配的风格</div>
+  <div id="empty" class="empty" style="display:none"></div>
   <div id="guide" class="guide" style="display:none"></div>
 </main>
 
 <div class="toast" id="toast">
   <span class="icon">✓</span>
-  <span id="toast-text">已复制 Prompt — 粘到 Claude / Codex / Hermes 即用</span>
+  <span id="toast-text"></span>
 </div>
 
 <div class="modal" id="modal">
   <div class="modal-wrap">
     <span class="modal-name" id="modal-name"></span>
-    <button class="modal-copy" id="modal-copy">📋 复制 Prompt</button>
+    <button class="modal-copy" id="modal-copy"></button>
     <button class="modal-close" id="modal-close">×</button>
     <div class="modal-inner">
       <iframe id="modal-iframe" src="" allow="fullscreen" allowfullscreen></iframe>
@@ -221,97 +215,299 @@
 
 <script>
 const REPO_URL = 'https://github.com/pakco77/html-ppt-skill';
+const UPSTREAM_URL = 'https://github.com/lewislulu/html-ppt-skill';
 const INSTALL_CMD = 'npx skills add ' + REPO_URL;
 
-/* ───── 37 主题 ───── */
-const THEMES = [
-  ['minimal-white',      '极简白',           'clean restraint, 白底简洁'],
-  ['editorial-serif',    '杂志衬线',         'high editorial, 衬线优雅'],
-  ['soft-pastel',        '马卡龙',           'soft pastel, 柔和粉彩'],
-  ['sharp-mono',         '黑白高对比',       'sharp mono, 黑白干练'],
-  ['arctic-cool',        '冷色调',           'arctic, 极地清冷'],
-  ['sunset-warm',        '暖色调',           'sunset, 暮色温暖'],
-  ['catppuccin-latte',   'Catppuccin Latte', '柔白拿铁'],
-  ['catppuccin-mocha',   'Catppuccin Mocha', '深色摩卡'],
-  ['dracula',            'Dracula',          '紫黑吸血鬼'],
-  ['tokyo-night',        'Tokyo Night',      '深蓝东京之夜'],
-  ['nord',               'Nord',             '北欧冷蓝'],
-  ['solarized-light',    'Solarized Light',  '日晒米黄'],
-  ['gruvbox-dark',       'Gruvbox Dark',     '复古橙黄'],
-  ['rose-pine',          'Rose Pine',        '玫瑰松林'],
-  ['neo-brutalism',      'Neo-Brutalism',    '新粗野主义'],
-  ['glassmorphism',      'Glassmorphism',    '玻璃拟态'],
-  ['bauhaus',            'Bauhaus',          '包豪斯几何'],
-  ['swiss-grid',         'Swiss Grid',       '瑞士国际主义'],
-  ['terminal-green',     'Terminal Green',   '终端绿屏'],
-  ['xiaohongshu-white',  '小红书白底',       'xhs 笔记白'],
-  ['rainbow-gradient',   'Rainbow Gradient', '七彩渐变'],
-  ['aurora',             'Aurora',           '极光渐变'],
-  ['blueprint',          'Blueprint',        '工程蓝图'],
-  ['memphis-pop',        'Memphis Pop',      '孟菲斯波普'],
-  ['cyberpunk-neon',     'Cyberpunk Neon',   '赛博霓虹'],
-  ['y2k-chrome',         'Y2K Chrome',       'Y2K 镜面'],
-  ['retro-tv',           'Retro TV',         'CRT 扫描线'],
-  ['japanese-minimal',   '和风极简',         '朱红和风'],
-  ['vaporwave',          'Vaporwave',        '蒸汽波'],
-  ['midcentury',         'Mid-Century',      '中世纪现代'],
-  ['corporate-clean',    'Corporate Clean',  '商务洁净'],
-  ['academic-paper',     '学术白皮书',       'academic'],
-  ['news-broadcast',     'News Broadcast',   '新闻播报'],
-  ['pitch-deck-vc',      'Pitch Deck VC',    'YC 路演风'],
-  ['magazine-bold',      'Magazine Bold',    '大字杂志'],
-  ['engineering-whiteprint','Engineering Whiteprint','工程白图'],
-  ['sainstore',          'SainStore',        '红蓝黄三色 / 暖米底 / 品牌主题']
-];
-
-/* ───── 16 完整 Deck ───── */
-const DECKS = [
-  ['xhs-white-editorial',      '白底杂志风',        'extracted', '小红书图文 / 生活方式'],
-  ['graphify-dark-graph',      '暗底知识图谱',      'extracted', 'AI / 图谱 / 数据产品'],
-  ['knowledge-arch-blueprint', '奶油蓝图架构',      'extracted', '架构图 / 系统思考'],
-  ['hermes-cyber-terminal',    '暗终端 cyber',      'extracted', 'devtool / agent demo'],
-  ['obsidian-claude-gradient', 'GitHub 暗紫渐变',   'extracted', '工具讲解 / LLM 产品'],
-  ['testing-safety-alert',     '红琥珀警示',        'extracted', '安全 / 事故复盘 / AI safety'],
-  ['xhs-pastel-card',          '柔和马卡龙',        'extracted', '生活方式 / 软情绪'],
-  ['dir-key-nav-minimal',      '方向键 8 色极简',    'extracted', 'keynote / 一页一观点'],
-  ['pitch-deck',               'Pitch Deck',        'scenario',  '融资 / 创业路演'],
-  ['product-launch',           'Product Launch',    'scenario',  '产品发布 / 发布会'],
-  ['tech-sharing',             '技术分享',          'scenario',  '内部技术分享 / 大会演讲'],
-  ['weekly-report',            'Weekly Report',     'scenario',  '周报 / 业务复盘'],
-  ['xhs-post',                 '小红书 9 屏 3:4',   'scenario',  '小红书 / IG 轮播'],
-  ['course-module',            '课程模块',          'scenario',  '在线课程 / workshop'],
-  ['presenter-mode-reveal',    '🎤 演讲者模式',     'scenario',  '带逐字稿 / speaker view'],
-  ['sainstore',                'SainStore 周报',    'scenario',  'SainStore 品牌 / 三色圆环 / 周报']
-];
-
-/* ───── 复制 Prompt 生成器 ───── */
-function themePrompt(name, zh){
-  return `请使用 html-ppt skill 帮我做一份 PPT。
-- 主题(theme) = ${name}（${zh}）
+/* ───── i18n strings ───── */
+const I18N = {
+  zh: {
+    htmlLang: 'zh-CN',
+    sub: '37 主题 · 16 完整 Deck · 给 Agent 一句话直接生成 PPT · ',
+    forkLink: 'fork 自 @lewislulu',
+    installTitle: '点击复制安装命令',
+    copy: '复制',
+    copied: '✓ 已复制',
+    search: '搜索名称…',
+    sizeS: '小', sizeM: '中', sizeL: '大',
+    tabThemes: '🎨 主题 (37)',
+    tabDecks: '📑 模板 (16)',
+    tabGuide: '📖 使用说明',
+    empty: '没有匹配的风格',
+    toastDefault: '已复制 Prompt — 粘到 Claude / Codex / Hermes 即用',
+    toastInstall: '已复制安装命令 — 粘到终端运行',
+    toastInstallShort: '已复制安装命令',
+    toastFail: '复制失败，请手动选中文本',
+    toastPromptPasted: '已复制 Prompt — 粘到 Agent 即用',
+    toastCardCopied: (label)=>`已复制「${label}」Prompt — 粘到 Agent 即用`,
+    copyPrompt: '📋 复制 Prompt',
+    zoomHint: 'CLICK TO ZOOM',
+    badgeScenario: 'scenario',
+    badgeExtracted: 'extracted',
+    themeDemoKicker: (n)=>`主题 · ${n}`,
+    themeDemoLede: '一图胜千言。同一份 demo 内容，换一个 CSS token 文件就换皮。',
+    themeDemoKpiLabel: '满意度',
+    guide: {
+      h1: '一行命令安装',
+      h1desc: '装好后，任何支持 AgentSkill 的 agent（Claude Code / Codex / Cursor / Hermes Agent 等）都能调用这套能力。',
+      linkRepo: '📦 GitHub 仓库',
+      linkZip: '⬇️ 下载 ZIP',
+      linkRelease: '🏷 Releases',
+      linkUpstream: '🙏 致敬上游 lewislulu',
+      h2: '如何让 Agent 用',
+      h2body: '<b style="color:#fff">最快路径：</b>到 <code>🎨 主题</code> 或 <code>📑 模板</code> 标签页，点任意一张卡片就把对应的 Prompt 复制到剪贴板了。直接粘到你的 Agent 对话框，把方括号 <code>[在此粘贴你的内容大纲]</code> 换成你自己的内容即可。',
+      h2steps: '<b style="color:#cfd4e2">四步流程：</b>',
+      steps: [
+        '装好 skill（上面那条命令）',
+        '在 picker 里挑一个主题 / 模板，点卡复制 Prompt',
+        '粘到 Agent，补内容，回车',
+        'Agent 生成 deck 目录，浏览器打开 <code>index.html</code> 即用'
+      ],
+      h3: '例句（可直接说给 Agent 听）',
+      examples: [
+        '"做一份 8 页的技术分享 slides，用 cyberpunk-neon 主题"',
+        '"把这段 outline 变成投资人 pitch deck，用 pitch-deck-vc 主题"',
+        '"做一个小红书图文，9 张，用 xhs-pastel-card 模板"',
+        '"做一份带演讲者模式的产品分享，用 presenter-mode-reveal 模板，每页带 200 字逐字稿"',
+        '"做一份 SainStore 周报，用 sainstore 主题，KPI / Pipeline / 阻塞项三段"'
+      ],
+      h4: '键盘快捷键（生成的 deck 自带运行时）',
+      shortcuts: [
+        ['← → Space PgUp/PgDn Home End', '翻页'],
+        ['F', '全屏'],
+        ['S', '打开演讲者窗口（磁吸卡片模式，含 CURRENT/NEXT/SCRIPT/TIMER）'],
+        ['N', '底部 notes 抽屉'],
+        ['R', '重置计时器（演讲者窗口内）'],
+        ['O', 'slide 总览网格'],
+        ['T', '切换主题（自动同步到演讲者窗口）'],
+        ['A', '在当前 slide 循环演示一个动画'],
+        ['#/N （URL 哈希）', '深链到第 N 页'],
+        ['?preview=N', '预览模式（只显示单页，隐藏 chrome）']
+      ],
+      h5: '资源 & 文档',
+      docLinks: [
+        ['/blob/main/README.zh-CN.md', '📖 中文 README'],
+        ['/blob/main/README.md', '📖 English README'],
+        ['/blob/main/SKILL.md', '🤖 SKILL.md（给 Agent 看的）'],
+        ['/blob/main/references/themes.md', '🎨 主题清单'],
+        ['/blob/main/references/full-decks.md', '📑 完整 Deck 模板'],
+        ['/blob/main/references/presenter-mode.md', '🎤 演讲者模式指南']
+      ],
+      tip: '💡 提示：所有主题/模板均为纯静态 HTML/CSS/JS，只用 CDN 字体。生成的 deck 离线也能跑。语言切换覆盖整个 picker UI 和主题预览 demo；full-deck 内部内容的双语化（每页正文）是后续工作 — 当前 deck 用 <code>?lang=en</code> 参数加载，模板可逐步读取该参数实现真双语。'
+    },
+    promptTheme: (name, label) => `请使用 html-ppt skill 帮我做一份 PPT。
+- 主题(theme) = ${name}（${label}）
 - 页数：8 页（你可按内容调整）
 - 输出：一个完整 deck 目录，包含 index.html + 必要 CSS/JS
 - 风格要求：套用 assets/themes/${name}.css，所有视觉 token 用该主题；不要修改主题文件本身
 - 内容：[在此粘贴你的内容大纲 / 主题方向 / 关键论点]
-请生成完整可直接浏览器打开的 HTML。`;
-}
-
-function deckPrompt(name, zh, kind){
-  return `请使用 html-ppt skill 的 full-deck 模板生成一份 PPT。
-- 模板(template) = ${name}（${zh}）
+请生成完整可直接浏览器打开的 HTML。`,
+    promptDeck: (name, label) => `请使用 html-ppt skill 的 full-deck 模板生成一份 PPT。
+- 模板(template) = ${name}（${label}）
 - 路径：templates/full-decks/${name}/
 - 输出：基于该模板复制一份新 deck，替换为我的内容
 - 保留模板的 .tpl-${name} 作用域 CSS 和所有视觉元素
 - 内容：[在此粘贴你的内容大纲 / 关键数据 / 章节结构]
-请生成完整可直接浏览器打开的 HTML。`;
+请生成完整可直接浏览器打开的 HTML。`
+  },
+  en: {
+    htmlLang: 'en',
+    sub: '37 themes · 16 full decks · one-line prompt → AI generates a PPT · ',
+    forkLink: 'fork from @lewislulu',
+    installTitle: 'Click to copy install command',
+    copy: 'Copy',
+    copied: '✓ Copied',
+    search: 'Search…',
+    sizeS: 'S', sizeM: 'M', sizeL: 'L',
+    tabThemes: '🎨 Themes (37)',
+    tabDecks: '📑 Decks (16)',
+    tabGuide: '📖 How to use',
+    empty: 'No matches',
+    toastDefault: 'Prompt copied — paste into Claude / Codex / Hermes',
+    toastInstall: 'Install command copied — paste in terminal',
+    toastInstallShort: 'Install command copied',
+    toastFail: 'Copy failed, please select the text manually',
+    toastPromptPasted: 'Prompt copied — paste into your agent',
+    toastCardCopied: (label)=>`Copied "${label}" prompt — paste into your agent`,
+    copyPrompt: '📋 Copy Prompt',
+    zoomHint: 'CLICK TO ZOOM',
+    badgeScenario: 'scenario',
+    badgeExtracted: 'extracted',
+    themeDemoKicker: (n)=>`Theme · ${n}`,
+    themeDemoLede: 'A picture is worth a thousand words. Same demo content, different CSS token file = different skin.',
+    themeDemoKpiLabel: 'satisfaction',
+    guide: {
+      h1: 'Install (one line)',
+      h1desc: 'After install, any AgentSkill-aware agent (Claude Code / Codex / Cursor / Hermes Agent ...) can use this skill.',
+      linkRepo: '📦 GitHub repo',
+      linkZip: '⬇️ Download ZIP',
+      linkRelease: '🏷 Releases',
+      linkUpstream: '🙏 Upstream (lewislulu)',
+      h2: 'How to make your agent use it',
+      h2body: '<b style="color:#fff">Fastest path:</b> open the <code>🎨 Themes</code> or <code>📑 Decks</code> tab, click any card — the matching prompt is copied to your clipboard. Paste into your agent and replace the bracketed <code>[paste your outline here]</code> with your content.',
+      h2steps: '<b style="color:#cfd4e2">Four steps:</b>',
+      steps: [
+        'Install the skill (the command above)',
+        'Pick a theme / deck in this picker, click the card to copy its prompt',
+        'Paste in your agent, fill in your outline, hit enter',
+        'Agent generates a deck directory — open <code>index.html</code> in any browser'
+      ],
+      h3: 'Example one-liners (say them to your agent)',
+      examples: [
+        '"Make an 8-page tech-sharing deck using the cyberpunk-neon theme"',
+        '"Turn this outline into a VC pitch deck using the pitch-deck-vc theme"',
+        '"Build a 9-card xiaohongshu post using the xhs-pastel-card template"',
+        '"Build a product talk with presenter mode using presenter-mode-reveal, 200-word speaker notes per slide"',
+        '"Build a SainStore weekly report using the sainstore theme: KPIs / pipeline / blockers"'
+      ],
+      h4: 'Keyboard shortcuts (built into every generated deck)',
+      shortcuts: [
+        ['← → Space PgUp/PgDn Home End', 'Navigate slides'],
+        ['F', 'Fullscreen'],
+        ['S', 'Open speaker window (magnetic cards: CURRENT / NEXT / SCRIPT / TIMER)'],
+        ['N', 'Bottom notes drawer'],
+        ['R', 'Reset timer (in speaker window)'],
+        ['O', 'Slide overview grid'],
+        ['T', 'Cycle theme (auto-syncs to speaker window)'],
+        ['A', 'Loop a sample animation on current slide'],
+        ['#/N (URL hash)', 'Deep-link to slide N'],
+        ['?preview=N', 'Preview mode (single slide, no chrome)']
+      ],
+      h5: 'Resources & docs',
+      docLinks: [
+        ['/blob/main/README.md', '📖 English README'],
+        ['/blob/main/README.zh-CN.md', '📖 中文 README'],
+        ['/blob/main/SKILL.md', '🤖 SKILL.md (for agents)'],
+        ['/blob/main/references/themes.md', '🎨 Themes index'],
+        ['/blob/main/references/full-decks.md', '📑 Full-deck templates'],
+        ['/blob/main/references/presenter-mode.md', '🎤 Presenter mode guide']
+      ],
+      tip: '💡 Tip: all themes/templates are pure static HTML/CSS/JS, CDN-fonts only. Generated decks work offline. Language toggle covers the whole picker UI + theme preview demo; full-deck content (per-slide copy) is loaded with a <code>?lang=en</code> URL parameter — individual deck templates can opt in to read it for true bilingual content.'
+    },
+    promptTheme: (name, label) => `Please use the html-ppt skill to build me a deck.
+- theme = ${name} (${label})
+- pages: 8 (adjust to fit content)
+- output: a complete deck directory with index.html + necessary CSS/JS
+- styling: apply assets/themes/${name}.css; use only that theme's visual tokens; do not modify the theme file
+- content: [paste your outline / theme direction / key points here]
+Please return a complete HTML deck I can open in the browser.`,
+    promptDeck: (name, label) => `Please use the html-ppt skill's full-deck template to build me a deck.
+- template = ${name} (${label})
+- path: templates/full-decks/${name}/
+- output: copy this template into a new deck and replace with my content
+- keep the .tpl-${name} scoped CSS and all visual elements
+- content: [paste your outline / key data / section structure here]
+Please return a complete HTML deck I can open in the browser.`
+  }
+};
+
+/* ───── Data: 37 themes + 16 decks ─────
+   Tuple: [id, zhLabel, enLabel, descZh, descEn]
+   When enLabel is null, the id (which is already English) is used as the EN label.
+*/
+const THEMES = [
+  ['minimal-white',          '极简白',              'Minimal White',       '白底简洁，纯净留白',                'clean restraint, generous whitespace'],
+  ['editorial-serif',        '杂志衬线',            'Editorial Serif',     '衬线优雅，杂志感',                  'high editorial, elegant serif'],
+  ['soft-pastel',            '马卡龙',              'Soft Pastel',         '柔和粉彩，可爱感',                  'soft pastel, gentle palette'],
+  ['sharp-mono',             '黑白高对比',          'Sharp Mono',          '黑白干练，强对比',                  'sharp mono, strong contrast'],
+  ['arctic-cool',            '冷色调',              'Arctic Cool',         '极地清冷，理性蓝',                  'arctic blue, rational cool'],
+  ['sunset-warm',            '暖色调',              'Sunset Warm',         '暮色温暖，橙红渐变',                'sunset warm, orange-red'],
+  ['catppuccin-latte',       'Catppuccin Latte',    null,                  '柔白拿铁配色',                      'soft latte palette'],
+  ['catppuccin-mocha',       'Catppuccin Mocha',    null,                  '深色摩卡',                          'dark mocha palette'],
+  ['dracula',                'Dracula',             null,                  '紫黑吸血鬼',                        'purple-black dracula'],
+  ['tokyo-night',            'Tokyo Night',         null,                  '深蓝东京之夜',                      'deep blue tokyo night'],
+  ['nord',                   'Nord',                null,                  '北欧冷蓝',                          'nordic cool blue'],
+  ['solarized-light',        'Solarized Light',     null,                  '日晒米黄',                          'sun-bleached beige'],
+  ['gruvbox-dark',           'Gruvbox Dark',        null,                  '复古橙黄',                          'retro orange-yellow'],
+  ['rose-pine',              'Rose Pine',           null,                  '玫瑰松林',                          'rose pine forest tones'],
+  ['neo-brutalism',          'Neo-Brutalism',       null,                  '新粗野主义',                        'new brutalism, bold blocks'],
+  ['glassmorphism',          'Glassmorphism',       null,                  '玻璃拟态',                          'frosted glass aesthetic'],
+  ['bauhaus',                'Bauhaus',             null,                  '包豪斯几何',                        'bauhaus geometric'],
+  ['swiss-grid',             'Swiss Grid',          null,                  '瑞士国际主义',                      'swiss international style'],
+  ['terminal-green',         'Terminal Green',      null,                  '终端绿屏',                          'CRT terminal green'],
+  ['xiaohongshu-white',      '小红书白底',          'XHS White',           'xhs 笔记白',                        'xiaohongshu note white'],
+  ['rainbow-gradient',       'Rainbow Gradient',    null,                  '七彩渐变',                          'seven-color gradient'],
+  ['aurora',                 'Aurora',              null,                  '极光渐变',                          'aurora gradient'],
+  ['blueprint',              'Blueprint',           null,                  '工程蓝图',                          'engineering blueprint'],
+  ['memphis-pop',            'Memphis Pop',         null,                  '孟菲斯波普',                        'memphis pop'],
+  ['cyberpunk-neon',         'Cyberpunk Neon',      null,                  '赛博霓虹',                          'cyberpunk neon'],
+  ['y2k-chrome',             'Y2K Chrome',          null,                  'Y2K 镜面金属',                      'Y2K chrome mirror'],
+  ['retro-tv',               'Retro TV',            null,                  'CRT 扫描线',                        'CRT scanlines'],
+  ['japanese-minimal',       '和风极简',            'Japanese Minimal',    '朱红和风',                          'vermilion japanese minimal'],
+  ['vaporwave',              'Vaporwave',           null,                  '蒸汽波',                            'vaporwave aesthetic'],
+  ['midcentury',             'Mid-Century',         null,                  '中世纪现代',                        'mid-century modern'],
+  ['corporate-clean',        'Corporate Clean',     null,                  '商务洁净',                          'clean corporate look'],
+  ['academic-paper',         '学术白皮书',          'Academic Paper',      '学术白皮书',                        'academic whitepaper'],
+  ['news-broadcast',         'News Broadcast',      null,                  '新闻播报',                          'news broadcast'],
+  ['pitch-deck-vc',          'Pitch Deck VC',       null,                  'YC 路演风',                         'YC-style pitch deck'],
+  ['magazine-bold',          'Magazine Bold',       null,                  '大字杂志',                          'magazine bold display'],
+  ['engineering-whiteprint', 'Engineering Whiteprint', null,               '工程白图',                          'engineering whiteprint'],
+  ['sainstore',              'SainStore',           null,                  '红蓝黄三色 / 暖米底 / 品牌主题',   'red-blue-yellow / warm beige / brand theme']
+];
+
+const DECKS = [
+  ['xhs-white-editorial',      '白底杂志风',         'XHS White Editorial',     'extracted', '小红书图文 / 生活方式',    'xhs post / lifestyle'],
+  ['graphify-dark-graph',      '暗底知识图谱',       'Dark Knowledge Graph',    'extracted', 'AI / 图谱 / 数据产品',     'AI / graph / data product'],
+  ['knowledge-arch-blueprint', '奶油蓝图架构',       'Cream Blueprint Arch',    'extracted', '架构图 / 系统思考',         'architecture / systems thinking'],
+  ['hermes-cyber-terminal',    '暗终端 cyber',       'Dark Cyber Terminal',     'extracted', 'devtool / agent demo',      'devtool / agent demo'],
+  ['obsidian-claude-gradient', 'GitHub 暗紫渐变',    'GitHub Dark Purple',      'extracted', '工具讲解 / LLM 产品',       'tooling / LLM product'],
+  ['testing-safety-alert',     '红琥珀警示',         'Red-Amber Safety Alert',  'extracted', '安全 / 事故复盘 / AI safety','safety / incident review / AI safety'],
+  ['xhs-pastel-card',          '柔和马卡龙',         'Soft Pastel Card',        'extracted', '生活方式 / 软情绪',         'lifestyle / soft tone'],
+  ['dir-key-nav-minimal',      '方向键 8 色极简',    'Dir-Key 8-color Minimal', 'extracted', 'keynote / 一页一观点',      'keynote / one point per slide'],
+  ['pitch-deck',               'Pitch Deck',         null,                      'scenario',  '融资 / 创业路演',           'fundraising / startup pitch'],
+  ['product-launch',           'Product Launch',     null,                      'scenario',  '产品发布 / 发布会',         'product launch / keynote'],
+  ['tech-sharing',             '技术分享',           'Tech Sharing',            'scenario',  '内部技术分享 / 大会演讲',   'internal tech talk / conference'],
+  ['weekly-report',            'Weekly Report',      null,                      'scenario',  '周报 / 业务复盘',           'weekly report / business review'],
+  ['xhs-post',                 '小红书 9 屏 3:4',    'XHS 9-card 3:4',          'scenario',  '小红书 / IG 轮播',          'xhs / IG carousel'],
+  ['course-module',            '课程模块',           'Course Module',           'scenario',  '在线课程 / workshop',       'online course / workshop'],
+  ['presenter-mode-reveal',    '🎤 演讲者模式',      '🎤 Presenter Mode',       'scenario',  '带逐字稿 / speaker view',   'speaker notes / speaker view'],
+  ['sainstore',                'SainStore 周报',     'SainStore Weekly',        'scenario',  'SainStore 品牌 / 三色圆环 / 周报', 'SainStore brand / 3-color rings / weekly report']
+];
+
+/* ───── State + helpers ───── */
+let lang = localStorage.getItem('htmlppt.lang') || (navigator.language && navigator.language.startsWith('zh') ? 'zh' : 'en');
+let view = 'themes';
+let q = '';
+
+function T(){ return I18N[lang]; }
+function themeLabel(item){ const [id, zh, en] = item; return lang==='zh' ? zh : (en || zh || id); }
+function themeDesc(item){ const [,,,dz,de] = item; return lang==='zh' ? dz : (de || dz); }
+function deckLabel(item){ const [id, zh, en] = item; return lang==='zh' ? zh : (en || zh || id); }
+function deckDesc(item){ const [,,,,dz,de] = item; return lang==='zh' ? dz : (de || dz); }
+
+/* ───── Theme preview demo HTML (bilingual) ───── */
+function themeDemo(themeName, label){
+  const t = T();
+  return `<!doctype html><html lang="${t.htmlLang}"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/themes/${themeName}.css">
+<style>
+  html,body{margin:0;height:100%;overflow:hidden}
+  .wrap{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+    padding:64px 88px;box-sizing:border-box;background:var(--bg);color:var(--text-1);
+    font-family:var(--font-sans)}
+  .swatch{display:flex;gap:10px;margin-top:16px}
+  .swatch div{width:38px;height:38px;border-radius:8px;border:1px solid var(--border)}
+  .kpi{font-size:48px;font-weight:800;letter-spacing:-.02em}
+</style></head><body><div class="wrap">
+  <p class="kicker">${t.themeDemoKicker(themeName)}</p>
+  <h1 class="h1" style="margin:8px 0 12px">${label}</h1>
+  <p class="lede">${t.themeDemoLede}</p>
+  <div class="swatch">
+    <div style="background:var(--accent)"></div>
+    <div style="background:var(--accent-2,var(--accent))"></div>
+    <div style="background:var(--accent-3,var(--accent))"></div>
+    <div style="background:var(--surface-2)"></div>
+    <div style="background:var(--text-1)"></div>
+  </div>
+  <p style="margin-top:20px"><span class="kpi">98.6%</span> <span class="dim" style="margin-left:8px">${t.themeDemoKpiLabel}</span></p>
+</div></body></html>`;
 }
 
-/* ───── 复制 & Toast ───── */
+/* ───── Copy + toast ───── */
 async function copyToClipboard(text){
-  try{
-    await navigator.clipboard.writeText(text);
-    return true;
-  }catch(e){
-    // fallback
+  try{ await navigator.clipboard.writeText(text); return true; }
+  catch(e){
     const ta = document.createElement('textarea');
     ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
     document.body.appendChild(ta); ta.select();
@@ -330,44 +526,54 @@ function showToast(msg){
   toastTimer = setTimeout(()=>toast.classList.remove('show'), 2400);
 }
 
-/* ───── 主题预览 demo HTML ───── */
-function themeDemo(themeName, label){
-  return `<!doctype html><html><head><meta charset="utf-8">
-<link rel="stylesheet" href="../assets/fonts.css">
-<link rel="stylesheet" href="../assets/base.css">
-<link rel="stylesheet" href="../assets/themes/${themeName}.css">
-<style>
-  html,body{margin:0;height:100%;overflow:hidden}
-  .wrap{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
-    padding:64px 88px;box-sizing:border-box;background:var(--bg);color:var(--text-1);
-    font-family:var(--font-sans)}
-  .swatch{display:flex;gap:10px;margin-top:16px}
-  .swatch div{width:38px;height:38px;border-radius:8px;border:1px solid var(--border)}
-  .kpi{font-size:48px;font-weight:800;letter-spacing:-.02em}
-</style></head><body><div class="wrap">
-  <p class="kicker">Theme · ${themeName}</p>
-  <h1 class="h1" style="margin:8px 0 12px">${label}</h1>
-  <p class="lede">A picture is worth a thousand words. 同一份 demo 内容，换一个 CSS token 文件就换皮。</p>
-  <div class="swatch">
-    <div style="background:var(--accent)"></div>
-    <div style="background:var(--accent-2,var(--accent))"></div>
-    <div style="background:var(--accent-3,var(--accent))"></div>
-    <div style="background:var(--surface-2)"></div>
-    <div style="background:var(--text-1)"></div>
-  </div>
-  <p style="margin-top:20px"><span class="kpi">98.6%</span> <span class="dim" style="margin-left:8px">satisfaction</span></p>
-</div></body></html>`;
+/* ───── Static UI strings binding ───── */
+function applyStaticI18n(){
+  const t = T();
+  document.documentElement.lang = t.htmlLang;
+
+  // brand sub
+  document.getElementById('brand-sub').innerHTML =
+    `${t.sub}<a href="${UPSTREAM_URL}" target="_blank" style="color:#8a90a4;text-decoration:underline">${t.forkLink}</a>`;
+
+  // install bar
+  document.getElementById('install-bar').title = t.installTitle;
+  const installBtn = document.getElementById('install-copy');
+  if(!installBtn.classList.contains('ok')) installBtn.textContent = t.copy;
+
+  // search
+  document.getElementById('search').placeholder = t.search;
+
+  // size toggle labels
+  document.querySelectorAll('.size-toggle button').forEach(b=>{
+    b.textContent = b.dataset.size==='s' ? t.sizeS : b.dataset.size==='m' ? t.sizeM : t.sizeL;
+  });
+
+  // tabs
+  document.querySelectorAll('.tab').forEach(b=>{
+    b.textContent = b.dataset.view==='themes' ? t.tabThemes
+                  : b.dataset.view==='decks'  ? t.tabDecks
+                  : t.tabGuide;
+  });
+
+  // empty + toast default
+  document.getElementById('empty').textContent = t.empty;
+  document.getElementById('toast-text').textContent = t.toastDefault;
+  document.getElementById('modal-copy').textContent = t.copyPrompt;
+
+  // lang toggle active state
+  document.querySelectorAll('.lang-toggle button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
 }
 
-/* ───── 渲染 ───── */
+/* ───── Render grid ───── */
 const grid = document.getElementById('grid');
 const emptyEl = document.getElementById('empty');
 const guideEl = document.getElementById('guide');
-let view = 'themes';
-let q = '';
 
 function render(){
-  // 模式切换
+  const t = T();
+
   if(view==='guide'){
     grid.style.display='none';
     emptyEl.style.display='none';
@@ -393,59 +599,61 @@ function render(){
     let promptText, modalSrc, modalLabel;
 
     if(view==='themes'){
-      const [name,zh,desc] = it;
-      promptText = themePrompt(name, zh);
-      // 用 srcdoc 而非 data: URL —— data URL 没有 base，无法解析 ../assets/ 相对路径
-      modalSrc = {srcdoc: themeDemo(name,zh)};
-      modalLabel = `${zh} · ${name}`;
+      const [name] = it;
+      const label = themeLabel(it);
+      const desc  = themeDesc(it);
+      promptText = t.promptTheme(name, label);
+      modalSrc   = {srcdoc: themeDemo(name, label)};
+      modalLabel = `${label} · ${name}`;
       card.innerHTML = `
-        <button class="copy-btn" type="button">📋 复制 Prompt</button>
-        <span class="zoom-hint">CLICK TO ZOOM</span>
+        <button class="copy-btn" type="button">${t.copyPrompt}</button>
+        <span class="zoom-hint">${t.zoomHint}</span>
         <div class="preview">
-          <iframe srcdoc='${themeDemo(name,zh).replace(/'/g,"&apos;")}' loading="lazy"></iframe>
+          <iframe srcdoc='${themeDemo(name,label).replace(/'/g,"&apos;")}' loading="lazy"></iframe>
         </div>
         <div class="meta">
-          <p class="name">${zh}</p>
+          <p class="name">${label}</p>
           <p class="desc">${desc}</p>
           <p class="id">assets/themes/${name}.css</p>
         </div>`;
     }else{
-      const [name,zh,kind,desc] = it;
-      promptText = deckPrompt(name, zh, kind);
-      modalSrc = {src: `full-decks/${name}/index.html`};
-      modalLabel = `${zh} · ${name}`;
+      const [name,,,kind] = it;
+      const label = deckLabel(it);
+      const desc  = deckDesc(it);
+      promptText = t.promptDeck(name, label);
+      // Pass lang to deck iframe for forward-compat — templates can opt in via URLSearchParams
+      modalSrc   = {src: `full-decks/${name}/index.html?lang=${lang}`};
+      modalLabel = `${label} · ${name}`;
       card.innerHTML = `
-        <button class="copy-btn" type="button">📋 复制 Prompt</button>
-        <span class="zoom-hint">CLICK TO ZOOM</span>
+        <button class="copy-btn" type="button">${t.copyPrompt}</button>
+        <span class="zoom-hint">${t.zoomHint}</span>
         <div class="preview">
           <span class="badge ${kind}">${kind}</span>
-          <iframe src="full-decks/${name}/index.html" loading="lazy"></iframe>
+          <iframe src="full-decks/${name}/index.html?lang=${lang}" loading="lazy"></iframe>
         </div>
         <div class="meta">
-          <p class="name">${zh}</p>
+          <p class="name">${label}</p>
           <p class="desc">${desc}</p>
           <p class="id">templates/full-decks/${name}/</p>
         </div>`;
     }
 
-    // 整卡点击 → 放大预览（携带 prompt 供 modal 复制用）
     card.addEventListener('click',()=>openModal(modalSrc, modalLabel, promptText));
 
-    // 右上角复制按钮 → 复制 Prompt，不冒泡
     const copyBtn = card.querySelector('.copy-btn');
     copyBtn.addEventListener('click', async (e)=>{
       e.stopPropagation();
       const ok = await copyToClipboard(promptText);
       if(ok){
         card.classList.add('copied');
-        copyBtn.textContent = '✓ 已复制';
-        showToast(`已复制「${card.querySelector('.name').textContent}」Prompt — 粘到 Agent 即用`);
+        copyBtn.textContent = T().copied;
+        showToast(T().toastCardCopied(card.querySelector('.name').textContent));
         setTimeout(()=>{
           card.classList.remove('copied');
-          copyBtn.textContent = '📋 复制 Prompt';
+          copyBtn.textContent = T().copyPrompt;
         }, 2400);
       }else{
-        showToast('复制失败，请手动选中文本');
+        showToast(T().toastFail);
       }
     });
 
@@ -453,104 +661,79 @@ function render(){
   });
 }
 
-/* ───── 使用说明 ───── */
+/* ───── Guide ───── */
 function renderGuide(){
+  const t = T().guide;
+  const shortcutRows = t.shortcuts.map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('');
+  const stepsList    = t.steps.map(s=>`<li>${s}</li>`).join('');
+  const exampleBoxes = t.examples.map(e=>`<div class="example">${e}</div>`).join('');
+  const docLinks     = t.docLinks.map(([href,label])=>`<a href="${REPO_URL}${href}" target="_blank">${label}</a>`).join('');
+
   guideEl.innerHTML = `
-    <h2><span class="num">1</span>一行命令安装</h2>
-    <p>装好后，任何支持 AgentSkill 的 agent（Claude Code / Codex / Cursor / Hermes Agent 等）都能调用这套能力。</p>
+    <h2><span class="num">1</span>${t.h1}</h2>
+    <p>${t.h1desc}</p>
     <div class="cmd-block">
       <span class="prompt">$</span>
       <code>${INSTALL_CMD}</code>
-      <button data-copy="${INSTALL_CMD}">复制</button>
+      <button data-copy="${INSTALL_CMD}">${T().copy}</button>
     </div>
     <div class="links">
-      <a href="${REPO_URL}" target="_blank">📦 GitHub 仓库</a>
-      <a href="${REPO_URL}/archive/refs/heads/main.zip">⬇️ 直接下载 ZIP</a>
-      <a href="${REPO_URL}/releases" target="_blank">🏷 Releases</a>
+      <a href="${REPO_URL}" target="_blank">${t.linkRepo}</a>
+      <a href="${REPO_URL}/archive/refs/heads/main.zip">${t.linkZip}</a>
+      <a href="${REPO_URL}/releases" target="_blank">${t.linkRelease}</a>
+      <a href="${UPSTREAM_URL}" target="_blank">${t.linkUpstream}</a>
     </div>
 
-    <h2><span class="num">2</span>如何让 Agent 用</h2>
-    <div class="block">
-      <p style="margin-top:0"><b style="color:#fff">最快路径：</b>到 <code>🎨 主题</code> 或 <code>📑 模板</code> 标签页，点任意一张卡片就把对应的 Prompt 复制到剪贴板了。直接粘到你的 Agent 对话框，把方括号 <code>[在此粘贴你的内容大纲]</code> 换成你自己的内容即可。</p>
-    </div>
-    <p style="margin-top:14px;color:#8a90a4"><b style="color:#cfd4e2">四步流程：</b></p>
-    <ul>
-      <li>装好 skill（上面那条命令）</li>
-      <li>在 picker 里挑一个主题 / 模板，点卡复制 Prompt</li>
-      <li>粘到 Agent，补内容，回车</li>
-      <li>Agent 生成 deck 目录，浏览器打开 <code>index.html</code> 即用</li>
-    </ul>
+    <h2><span class="num">2</span>${t.h2}</h2>
+    <div class="block"><p style="margin-top:0">${t.h2body}</p></div>
+    <p style="margin-top:14px;color:#8a90a4">${t.h2steps}</p>
+    <ul>${stepsList}</ul>
 
-    <h2><span class="num">3</span>例句（可直接说给 Agent 听）</h2>
-    <div class="example">"做一份 8 页的技术分享 slides，用 cyberpunk-neon 主题"</div>
-    <div class="example">"把这段 outline 变成投资人 pitch deck，用 pitch-deck-vc 主题"</div>
-    <div class="example">"做一个小红书图文，9 张，用 xhs-pastel-card 模板"</div>
-    <div class="example">"做一份带演讲者模式的产品分享，用 presenter-mode-reveal 模板，每页带 200 字逐字稿"</div>
-    <div class="example">"做一份 SainStore 周报，用 sainstore 主题，KPI / Pipeline / 阻塞项三段"</div>
+    <h2><span class="num">3</span>${t.h3}</h2>
+    ${exampleBoxes}
 
-    <h2><span class="num">4</span>键盘快捷键（生成的 deck 自带运行时）</h2>
-    <table>
-      <tr><td>← → Space PgUp/PgDn Home End</td><td>翻页</td></tr>
-      <tr><td>F</td><td>全屏</td></tr>
-      <tr><td>S</td><td>打开演讲者窗口（磁吸卡片模式，含 CURRENT/NEXT/SCRIPT/TIMER）</td></tr>
-      <tr><td>N</td><td>底部 notes 抽屉</td></tr>
-      <tr><td>R</td><td>重置计时器（演讲者窗口内）</td></tr>
-      <tr><td>O</td><td>slide 总览网格</td></tr>
-      <tr><td>T</td><td>切换主题（自动同步到演讲者窗口）</td></tr>
-      <tr><td>A</td><td>在当前 slide 循环演示一个动画</td></tr>
-      <tr><td>#/N （URL 哈希）</td><td>深链到第 N 页</td></tr>
-      <tr><td>?preview=N</td><td>预览模式（只显示单页，隐藏 chrome）</td></tr>
-    </table>
+    <h2><span class="num">4</span>${t.h4}</h2>
+    <table>${shortcutRows}</table>
 
-    <h2><span class="num">5</span>资源 & 文档</h2>
-    <div class="links">
-      <a href="${REPO_URL}/blob/main/README.zh-CN.md" target="_blank">📖 中文 README</a>
-      <a href="${REPO_URL}/blob/main/SKILL.md" target="_blank">🤖 SKILL.md（给 Agent 看的）</a>
-      <a href="${REPO_URL}/blob/main/references/themes.md" target="_blank">🎨 主题清单</a>
-      <a href="${REPO_URL}/blob/main/references/full-decks.md" target="_blank">📑 完整 Deck 模板</a>
-      <a href="${REPO_URL}/blob/main/references/presenter-mode.md" target="_blank">🎤 演讲者模式指南</a>
-    </div>
-    <p style="margin-top:24px;color:#6a7086;font-size:12px;text-align:center">
-      💡 提示：所有主题/模板均为纯静态 HTML/CSS/JS，只用 CDN 字体。生成的 deck 离线也能跑。
-    </p>
+    <h2><span class="num">5</span>${t.h5}</h2>
+    <div class="links">${docLinks}</div>
+    <p style="margin-top:24px;color:#6a7086;font-size:12px;text-align:center">${t.tip}</p>
   `;
-  // 绑定 guide 里的复制按钮
   guideEl.querySelectorAll('button[data-copy]').forEach(btn=>{
     btn.addEventListener('click', async ()=>{
       const ok = await copyToClipboard(btn.dataset.copy);
       if(ok){
         const orig = btn.textContent;
-        btn.textContent = '✓ 已复制';
+        btn.textContent = T().copied;
         btn.classList.add('ok');
-        showToast('已复制安装命令');
+        showToast(T().toastInstallShort);
         setTimeout(()=>{ btn.textContent = orig; btn.classList.remove('ok'); }, 2000);
       }
     });
   });
 }
 
-/* ───── 顶部安装栏复制 ───── */
+/* ───── Top install-bar copy ───── */
 const installBar = document.getElementById('install-bar');
 const installBtn = document.getElementById('install-copy');
 async function copyInstall(){
   const ok = await copyToClipboard(INSTALL_CMD);
   if(ok){
-    installBtn.textContent = '✓ 已复制';
+    installBtn.textContent = T().copied;
     installBtn.classList.add('ok');
-    showToast('已复制安装命令 — 粘到终端运行');
-    setTimeout(()=>{ installBtn.textContent = '复制'; installBtn.classList.remove('ok'); }, 2000);
+    showToast(T().toastInstall);
+    setTimeout(()=>{ installBtn.textContent = T().copy; installBtn.classList.remove('ok'); }, 2000);
   }
 }
 installBtn.addEventListener('click', e=>{ e.stopPropagation(); copyInstall(); });
 installBar.addEventListener('click', copyInstall);
 
-/* ───── Tab / 搜索 / 尺寸 ───── */
+/* ───── Tab / search / size / lang ───── */
 document.querySelectorAll('.tab').forEach(btn=>{
   btn.addEventListener('click',()=>{
     document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     view = btn.dataset.view;
-    // guide 模式下隐藏搜索 / 尺寸
     const ctrls = document.querySelector('.controls');
     ctrls.style.visibility = view==='guide' ? 'hidden' : 'visible';
     render();
@@ -565,19 +748,28 @@ document.querySelectorAll('.size-toggle button').forEach(btn=>{
   });
 });
 
+document.querySelectorAll('.lang-toggle button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    if(btn.classList.contains('active')) return;
+    lang = btn.dataset.lang;
+    localStorage.setItem('htmlppt.lang', lang);
+    applyStaticI18n();
+    render();
+  });
+});
+
 document.getElementById('search').addEventListener('input',e=>{
   q = e.target.value;
   render();
 });
 
-/* ───── Modal 放大预览 ───── */
+/* ───── Modal ───── */
 const modal = document.getElementById('modal');
 const modalIframe = document.getElementById('modal-iframe');
 const modalName = document.getElementById('modal-name');
 const modalCopy = document.getElementById('modal-copy');
 let modalPrompt = '';
 function openModal(src, name, prompt){
-  // src 形如 {srcdoc:'...'} 或 {src:'...'}；先清空两个属性避免互相干扰
   modalIframe.removeAttribute('srcdoc');
   modalIframe.removeAttribute('src');
   if(src && typeof src === 'object' && 'srcdoc' in src){
@@ -585,12 +777,12 @@ function openModal(src, name, prompt){
   }else if(src && typeof src === 'object' && 'src' in src){
     modalIframe.src = src.src;
   }else if(typeof src === 'string'){
-    modalIframe.src = src; // 兜底旧调用
+    modalIframe.src = src;
   }
   modalName.textContent = name;
   modalPrompt = prompt || '';
   modalCopy.style.display = prompt ? 'inline-flex' : 'none';
-  modalCopy.textContent = '📋 复制 Prompt';
+  modalCopy.textContent = T().copyPrompt;
   modalCopy.classList.remove('ok');
   modal.classList.add('open');
 }
@@ -607,16 +799,18 @@ modalCopy.addEventListener('click', async e => {
   if(!modalPrompt) return;
   const ok = await copyToClipboard(modalPrompt);
   if(ok){
-    modalCopy.textContent = '✓ 已复制';
+    modalCopy.textContent = T().copied;
     modalCopy.classList.add('ok');
-    showToast('已复制 Prompt — 粘到 Agent 即用');
+    showToast(T().toastPromptPasted);
     setTimeout(()=>{
-      modalCopy.textContent = '📋 复制 Prompt';
+      modalCopy.textContent = T().copyPrompt;
       modalCopy.classList.remove('ok');
     }, 2000);
   }
 });
 
+/* ───── Boot ───── */
+applyStaticI18n();
 render();
 </script>
 </body>

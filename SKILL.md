@@ -12,15 +12,15 @@ All pages share a token-based design system in `assets/base.css`.
 ## Install
 
 ```bash
-npx skills add https://github.com/lewislulu/html-ppt-skill
+npx skills add https://github.com/pakco77/html-ppt-skill
 ```
 
 One command, no build. Pure static HTML/CSS/JS with only CDN webfonts.
 
 ## What the skill gives you
 
-- **36 themes** (`assets/themes/*.css`) — minimal-white, editorial-serif, soft-pastel, sharp-mono, arctic-cool, sunset-warm, catppuccin-latte/mocha, dracula, tokyo-night, nord, solarized-light, gruvbox-dark, rose-pine, neo-brutalism, glassmorphism, bauhaus, swiss-grid, terminal-green, xiaohongshu-white, rainbow-gradient, aurora, blueprint, memphis-pop, cyberpunk-neon, y2k-chrome, retro-tv, japanese-minimal, vaporwave, midcentury, corporate-clean, academic-paper, news-broadcast, pitch-deck-vc, magazine-bold, engineering-whiteprint
-- **15 full-deck templates** (`templates/full-decks/<name>/`) — complete multi-slide decks with scoped `.tpl-<name>` CSS. 8 extracted from real-world decks (xhs-white-editorial, graphify-dark-graph, knowledge-arch-blueprint, hermes-cyber-terminal, obsidian-claude-gradient, testing-safety-alert, xhs-pastel-card, dir-key-nav-minimal), 7 scenario scaffolds (pitch-deck, product-launch, tech-sharing, weekly-report, xhs-post 3:4, course-module, **presenter-mode-reveal** — 演讲者模式专用)
+- **37 themes** (`assets/themes/*.css`) — minimal-white, editorial-serif, soft-pastel, sharp-mono, arctic-cool, sunset-warm, catppuccin-latte/mocha, dracula, tokyo-night, nord, solarized-light, gruvbox-dark, rose-pine, neo-brutalism, glassmorphism, bauhaus, swiss-grid, terminal-green, xiaohongshu-white, rainbow-gradient, aurora, blueprint, memphis-pop, cyberpunk-neon, y2k-chrome, retro-tv, japanese-minimal, vaporwave, midcentury, corporate-clean, academic-paper, news-broadcast, pitch-deck-vc, magazine-bold, engineering-whiteprint, **sainstore** (brand)
+- **16 full-deck templates** (`templates/full-decks/<name>/`) — complete multi-slide decks with scoped `.tpl-<name>` CSS. 8 extracted from real-world decks (xhs-white-editorial, graphify-dark-graph, knowledge-arch-blueprint, hermes-cyber-terminal, obsidian-claude-gradient, testing-safety-alert, xhs-pastel-card, dir-key-nav-minimal), 8 scenario scaffolds (pitch-deck, product-launch, tech-sharing, weekly-report, xhs-post 3:4, course-module, **presenter-mode-reveal** — 演讲者模式专用, **sainstore** — 品牌周报)
 - **31 layouts** (`templates/single-page/*.html`) with realistic demo data
 - **27 CSS animations** (`assets/animations/animations.css`) via `data-anim`
 - **20 canvas FX animations** (`assets/animations/fx/*.js`) via `data-fx` — particle-burst, confetti-cannon, firework, starfield, matrix-rain, knowledge-graph (force-directed), neural-net (pulses), constellation, orbit-ring, galaxy-swirl, word-cascade, letter-explode, chain-react, magnetic-field, data-stream, gradient-blob, sparkle-trail, shockwave, typewriter-multi, counter-explosion
@@ -68,7 +68,7 @@ tasteful default and confirm.
 
 1. **Content & audience.** What's the deck about, how many slides, who's
    watching (engineers / execs / 小红书读者 / 学生 / VC)?
-2. **Style / theme.** Which of the 36 themes fits? If unsure, recommend 2-3
+2. **Style / theme.** Which of the 37 themes fits? If unsure, recommend 2-3
    candidates based on tone:
    - Business / investor pitch → `pitch-deck-vc`, `corporate-clean`, `swiss-grid`
    - Tech sharing / engineering → `tokyo-night`, `dracula`, `catppuccin-mocha`,
@@ -155,10 +155,10 @@ Chinese + English deck, and how to export.
 
 ## Catalogs (load when needed)
 
-- [references/themes.md](references/themes.md) — all 36 themes with when-to-use.
+- [references/themes.md](references/themes.md) — all 37 themes with when-to-use.
 - [references/layouts.md](references/layouts.md) — all 31 layout types.
 - [references/animations.md](references/animations.md) — 27 CSS + 20 canvas FX animations.
-- [references/full-decks.md](references/full-decks.md) — all 15 full-deck templates.
+- [references/full-decks.md](references/full-decks.md) — all 16 full-deck templates.
 - [references/presenter-mode.md](references/presenter-mode.md) — **演讲者模式 + 逐字稿编写指南（技术分享/演讲必看）**.
 - [references/authoring-guide.md](references/authoring-guide.md) — full workflow.
 
@@ -172,14 +172,14 @@ html-ppt/
 │   ├── base.css             (tokens + primitives — do not edit per deck)
 │   ├── fonts.css            (webfont imports)
 │   ├── runtime.js           (keyboard + presenter + overview + theme cycle)
-│   ├── themes/*.css         (36 token overrides, one per theme)
+│   ├── themes/*.css         (37 token overrides, one per theme)
 │   └── animations/
 │       ├── animations.css   (27 named CSS entry animations)
 │       ├── fx-runtime.js    (auto-init [data-fx] on slide enter)
 │       └── fx/*.js          (20 canvas FX modules: particles/graph/fireworks…)
 ├── templates/
 │   ├── deck.html                  (minimal 6-slide starter)
-│   ├── theme-showcase.html        (36 slides, iframe-isolated per theme)
+│   ├── theme-showcase.html        (37 slides, iframe-isolated per theme)
 │   ├── layout-showcase.html       (iframe tour of all 31 layouts)
 │   ├── animation-showcase.html    (20 FX + 27 CSS animation slides)
 │   ├── full-decks-index.html      (gallery of all 14 full-deck templates)

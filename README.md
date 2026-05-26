@@ -1,7 +1,7 @@
 # html-ppt — HTML PPT Studio
 
 > A world-class AgentSkill for producing professional HTML presentations in
-> **36 themes**, **15 full-deck templates**, **31 page layouts**,
+> **37 themes**, **16 full-deck templates**, **31 page layouts**,
 > **47 animations** (27 CSS + 20 canvas FX), and a **true presenter mode**
 > with pixel-perfect previews + speaker script + timer — all pure static
 > HTML/CSS/JS, no build step.
@@ -12,7 +12,7 @@
 
 ![html-ppt — cover with live previews](docs/readme/hero.gif)
 
-> One command installs **36 themes × 20 canvas FX × 31 layouts × 15 full decks + presenter mode**. Every preview above is a live iframe of a real template file rendering inside the deck — no screenshots, no mock-ups.
+> One command installs **37 themes × 20 canvas FX × 31 layouts × 16 full decks + presenter mode**. Every preview above is a live iframe of a real template file rendering inside the deck — no screenshots, no mock-ups.
 
 ## 🎤 Presenter Mode (new!)
 
@@ -47,7 +47,7 @@ word speaker scripts on every slide.
 ## Install (one command)
 
 ```bash
-npx skills add https://github.com/lewislulu/html-ppt-skill
+npx skills add https://github.com/pakco77/html-ppt-skill
 ```
 
 That registers the skill with your agent runtime. After install, any agent
@@ -62,8 +62,8 @@ that supports AgentSkills can author presentations by asking things like:
 | | Count | Where |
 |---|---|---|
 | 🎤 **Presenter mode** | **NEW** | `S` key / `?preview=N` |
-| 🎨 **Themes** | **36** | `assets/themes/*.css` |
-| 📑 **Full-deck templates** | **15** | `templates/full-decks/<name>/` |
+| 🎨 **Themes** | **37** | `assets/themes/*.css` |
+| 📑 **Full-deck templates** | **16** | `templates/full-decks/<name>/` |
 | 🧩 **Single-page layouts** | **31** | `templates/single-page/*.html` |
 | ✨ **CSS animations** | **27** | `assets/animations/animations.css` |
 | 💥 **Canvas FX animations** | **20** | `assets/animations/fx/*.js` |
@@ -81,7 +81,7 @@ that supports AgentSkills can author presentations by asking things like:
 `corporate-clean`, `academic-paper`, `news-broadcast`, `pitch-deck-vc`,
 `magazine-bold`, `engineering-whiteprint`.
 
-![36 themes · 8 of them](docs/readme/themes.png)
+![37 themes · 8 of them](docs/readme/themes.png)
 
 Each is a pure CSS-tokens file — swap one `<link>` to reskin the entire deck.
 Browse them all in `templates/theme-showcase.html` (each slide rendered in an
@@ -155,7 +155,7 @@ module auto-initialised on slide enter via `fx-runtime.js`.
 ./scripts/new-deck.sh my-talk
 
 # Browse everything
-open templates/theme-showcase.html         # all 36 themes (iframe-isolated)
+open templates/theme-showcase.html         # all 37 themes (iframe-isolated)
 open templates/layout-showcase.html        # all 31 layouts
 open templates/animation-showcase.html     # all 47 animations
 open templates/full-decks-index.html       # all 14 full decks
@@ -187,7 +187,7 @@ html-ppt-skill/
 ├── SKILL.md                      agent-facing dispatcher
 ├── README.md                     this file
 ├── references/                   detailed catalogs
-│   ├── themes.md                 36 themes with when-to-use
+│   ├── themes.md                 37 themes with when-to-use
 │   ├── layouts.md                31 layout types
 │   ├── animations.md             27 CSS + 20 FX catalog
 │   ├── full-decks.md             14 full-deck templates

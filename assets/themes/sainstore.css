@@ -1,0 +1,143 @@
+/* theme: sainstore — SainStore 品牌主题
+ * 三色 DNA: 红 #E7380D · 蓝 #1D7FB7 · 黄 #F5AB18
+ * 暖米底 + 暖深灰文字
+ * 标志性元素: 顶部三色条 · 右下角 LOGO 水印 · 封面大装饰圆环
+ *
+ * 注：本文件被加载即等于"激活该主题"。所有装饰用伪元素覆盖到 body，
+ * 同时兼容三种容器场景（.slide / .wrap / 裸 body）。
+ */
+:root{
+  --bg:#EFEAE0;
+  --bg-soft:#E8E2D3;
+  --surface:#FBF8F1;
+  --surface-2:#F2EDE0;
+  --border:rgba(61,57,53,.14);
+  --border-strong:rgba(61,57,53,.32);
+  --text-1:#3D3935;
+  --text-2:#6B6560;
+  --text-3:#9A938C;
+  --accent:#E7380D;
+  --accent-2:#1D7FB7;
+  --accent-3:#F5AB18;
+  --good:#1D7FB7;
+  --warn:#F5AB18;
+  --bad:#E7380D;
+  --grad:linear-gradient(135deg,#E7380D 0%,#F5AB18 55%,#1D7FB7 100%);
+  --grad-soft:linear-gradient(135deg,#F7E5DD 0%,#FCEFD7 55%,#DCEBF4 100%);
+  --radius:10px;--radius-sm:6px;--radius-lg:18px;
+  --shadow:0 1px 2px rgba(61,57,53,.06),0 10px 28px rgba(61,57,53,.10);
+  --shadow-lg:0 18px 48px rgba(61,57,53,.18);
+  --font-sans:'Inter','Microsoft YaHei','Noto Sans SC','PingFang SC',sans-serif;
+  --font-display:'Inter','Microsoft YaHei','Noto Sans SC',sans-serif;
+  --font-mono:'JetBrains Mono','IBM Plex Mono',SFMono-Regular,Menlo,monospace;
+  --letter-tight:-.025em;
+
+  /* SainStore 私有色 */
+  --ss-red:#E7380D;
+  --ss-blue:#1D7FB7;
+  --ss-yellow:#F5AB18;
+  --ss-logo:url('../sainstore-logo.png');
+}
+
+body{background:var(--bg)}
+
+/* ===== 顶部三色条 + 右下 LOGO（绑在 body 上，所有场景都生效）===== */
+body::before{
+  content:"";
+  position:fixed;top:0;left:0;right:0;height:6px;
+  background:linear-gradient(
+    to right,
+    var(--ss-red) 0 33.33%,
+    var(--ss-blue) 33.33% 66.66%,
+    var(--ss-yellow) 66.66% 100%
+  );
+  z-index:200;pointer-events:none;
+}
+body::after{
+  content:"";
+  position:fixed;right:48px;bottom:36px;
+  width:128px;height:28px;
+  background:var(--ss-logo) no-repeat center/contain;
+  opacity:.6;
+  z-index:200;pointer-events:none;
+  filter:saturate(.92);
+}
+
+/* ===== 进度条三色 ===== */
+.progress-bar > span{
+  background:linear-gradient(to right,var(--ss-red),var(--ss-yellow),var(--ss-blue));
+}
+
+/* ===== Kicker 红色加粗 ===== */
+.kicker{color:var(--ss-red);font-weight:700;letter-spacing:.14em}
+
+/* ===== 渐变文字 ===== */
+.gradient-text{
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+
+/* ===== 卡片：暖米底 + 三色循环顶边 ===== */
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-top:3px solid var(--ss-red);
+  box-shadow:0 1px 0 rgba(61,57,53,.04),0 10px 28px rgba(61,57,53,.08);
+}
+.card:nth-child(3n+2){border-top-color:var(--ss-blue)}
+.card:nth-child(3n+3){border-top-color:var(--ss-yellow)}
+.card-soft{background:var(--surface-2);border-top-color:transparent}
+.card-outline{background:transparent;border:1.5px solid var(--border-strong);border-top:1.5px solid var(--border-strong);box-shadow:none}
+
+/* ===== Pill 品牌色 ===== */
+.pill-accent{
+  background:rgba(231,56,13,.10);
+  color:var(--ss-red);
+  border-color:rgba(231,56,13,.28);
+}
+
+/* ===== Divider accent：三色短条 ===== */
+.divider-accent{
+  height:4px;width:96px;border-radius:2px;
+  background:linear-gradient(to right,var(--ss-red) 0 33.3%,var(--ss-blue) 33.3% 66.6%,var(--ss-yellow) 66.6% 100%);
+}
+
+/* ===== Header/Footer 间距 + 编号配色 ===== */
+.deck-header{top:30px}
+.slide-number{color:var(--ss-red);font-weight:700}
+
+/* ===== 链接/Code/选区 ===== */
+a{color:var(--ss-blue);text-decoration-color:rgba(29,127,183,.4)}
+code{
+  background:rgba(29,127,183,.10);
+  color:var(--ss-blue);
+  padding:1px 6px;border-radius:4px;
+  font-family:var(--font-mono);font-size:.92em;
+}
+::selection{background:rgba(245,171,24,.45);color:var(--text-1)}
+
+/* ===== 封面（首张 .slide）：大三色装饰圆环 ===== */
+.deck > .slide:first-child::before{
+  content:"";
+  position:absolute;
+  right:-100px;top:50%;transform:translateY(-50%);
+  width:560px;height:560px;border-radius:50%;
+  background:
+    radial-gradient(circle, transparent 0 38%, var(--ss-yellow) 38% 41%, transparent 41% 60%, var(--ss-blue) 60% 63%, transparent 63% 82%, var(--ss-red) 82% 85%, transparent 85% 100%);
+  opacity:.7;
+  z-index:1;pointer-events:none;
+}
+
+/* picker 单页预览也来个圆环（.wrap 是 picker themeDemo 的容器） */
+.wrap{position:relative}
+.wrap::before{
+  content:"";
+  position:absolute;
+  right:-80px;top:50%;transform:translateY(-50%);
+  width:380px;height:380px;border-radius:50%;
+  background:
+    radial-gradient(circle, transparent 0 38%, var(--ss-yellow) 38% 41%, transparent 41% 60%, var(--ss-blue) 60% 63%, transparent 63% 82%, var(--ss-red) 82% 85%, transparent 85% 100%);
+  opacity:.65;
+  z-index:0;pointer-events:none;
+}
+.wrap > *{position:relative;z-index:1}

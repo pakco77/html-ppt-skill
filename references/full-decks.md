@@ -83,6 +83,7 @@ These are not extracted from a single source — they are generic scaffolds for 
 | 13 | `xhs-post`         | 9  | **3:4 @ 810×1080**, warm pastel, dashed sticker cards, page dots | 小红书 图文 post, Instagram carousel |
 | 14 | `course-module`    | 7  | Warm paper + Playfair serif, persistent left sidebar of learning objectives, MCQ self-check | 教学模块, online course, workshop module |
 | 15 | `presenter-mode-reveal` 🎤 | 6  | **演讲者模式专用** · tokyo-night 默认 · 5 主题 T 键切换 · 每页带 150–300 字逐字稿示例 | **技术分享/演讲/课程**—需要按 S 键看逐字稿的场景 ✨ |
+| 16 | `sainstore`        | 13 | 暖米底 + SainStore 红/蓝/黄三色 · 3 圆环 KPI · Pipeline / 阻塞项 / Next-week 表格 | SainStore / Genmitsu 周报、品牌培训、办公安全演示 |
 
 Each folder: `index.html`, scoped `style.css` (prefixed `.tpl-<name>`), `README.md`. The `xhs-post` template overrides the default `.slide` box to fixed `810×1080` for 3:4 portrait.
 

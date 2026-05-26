@@ -430,6 +430,11 @@
     font-size: 18px; line-height: 1.75;
     color: #d0d7de;
     font-family: "Noto Sans SC", -apple-system, sans-serif;
+    outline: none;
+  }
+  .pcard-notes .pcard-body[contenteditable="true"]:focus {
+    box-shadow: inset 0 0 0 2px rgba(88,166,255,.4);
+    border-radius: 0;
   }
   .pcard-notes .pcard-body p { margin: 0 0 .7em 0; }
   .pcard-notes .pcard-body strong { color: #f0883e; }
@@ -439,6 +444,27 @@
     background: rgba(255,255,255,.08); padding: 1px 6px; border-radius: 4px;
   }
   .pcard-notes .empty { color: #484f58; font-style: italic; }
+  .pcard-notes .notes-toolbar {
+    display: flex; gap: 6px; padding: 6px 10px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    background: rgba(255,255,255,.02);
+    flex-shrink: 0; align-items: center;
+  }
+  .pcard-notes .notes-toolbar button {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    color: #c9d1d9;
+    padding: 3px 10px;
+    border-radius: 5px;
+    font-size: 11px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .pcard-notes .notes-toolbar button:hover { background: rgba(240,136,62,.2); border-color: #f0883e; color: #f0883e; }
+  .pcard-notes .notes-toolbar .save-status {
+    margin-left: auto; font-size: 10px; color: #6e7681; letter-spacing: .08em;
+  }
+  .pcard-notes .notes-toolbar .save-status.saved { color: #3fb950; }
 
   /* Timer card */
   .pcard-timer .pcard-body {
@@ -540,8 +566,15 @@
     <div class="pcard-head" data-drag>
       <span class="pcard-dot"></span>
       <span class="pcard-title">SPEAKER SCRIPT · 逐字稿</span>
+      <span class="pcard-meta" id="notes-meta">—</span>
     </div>
-    <div class="pcard-body" id="notes-body"></div>
+    <div class="notes-toolbar">
+      <button id="notes-copy" title="复制本页逐字稿（纯文本）">📋 复制本页</button>
+      <button id="notes-export" title="导出全部逐字稿为 HTML（可粘回 deck）">⤓ 导出全部</button>
+      <button id="notes-revert" title="放弃编辑，恢复到 HTML 源里的原始逐字稿">↺ 还原本页</button>
+      <span class="save-status" id="notes-status">点击区域开始写</span>
+    </div>
+    <div class="pcard-body" id="notes-body" contenteditable="true" spellcheck="false"></div>
     <div class="pcard-resize" data-resize></div>
   </div>
 
@@ -587,10 +620,31 @@
   var iframeCur = document.getElementById('iframe-cur');
   var iframeNxt = document.getElementById('iframe-nxt');
   var notesBody = document.getElementById('notes-body');
+  var notesStatus = document.getElementById('notes-status');
   var curMeta = document.getElementById('cur-meta');
   var nxtMeta = document.getElementById('nxt-meta');
   var timerDisplay = document.getElementById('timer-display');
   var timerCount = document.getElementById('timer-count');
+
+  /* ===== Notes persistence (per slide, per deck) ===== */
+  var NOTES_KEY = 'html-ppt-notes:' + ${deckUrlJSON};
+  function readAllNotes(){
+    try { return JSON.parse(localStorage.getItem(NOTES_KEY) || '{}'); } catch(e) { return {}; }
+  }
+  function readNote(i){
+    var all = readAllNotes();
+    return Object.prototype.hasOwnProperty.call(all, i) ? all[i] : null;
+  }
+  function writeNote(i, html){
+    var all = readAllNotes();
+    if (html === null) delete all[i]; else all[i] = html;
+    try { localStorage.setItem(NOTES_KEY, JSON.stringify(all)); } catch(e) {}
+  }
+  function setStatus(cls, text){
+    if (!notesStatus) return;
+    notesStatus.className = 'save-status' + (cls ? ' ' + cls : '');
+    notesStatus.textContent = text;
+  }
 
   /* ===== Default card layout ===== */
   function defaultLayout() {
@@ -785,9 +839,20 @@
       nxtMeta.textContent = 'END';
     }
 
-    /* Notes */
-    var note = slideMeta[n].notes;
-    notesBody.innerHTML = note || '<span class="empty">（这一页还没有逐字稿）</span>';
+    /* Notes — 优先显示用户编辑过的版本，否则回退到源 HTML */
+    var edited = readNote(n);
+    var src = slideMeta[n].notes;
+    if (edited !== null) {
+      notesBody.innerHTML = edited;
+      setStatus('saved', '✓ 已保存（编辑版）');
+    } else if (src) {
+      notesBody.innerHTML = src;
+      setStatus('', '源 HTML · 可直接编辑');
+    } else {
+      notesBody.innerHTML = '<span class="empty">（这一页还没有逐字稿，点这里开始写）</span>';
+      setStatus('', '空白 · 点击开始写');
+    }
+    document.getElementById('notes-meta').textContent = (n + 1) + '/' + total;
 
     /* Timer count */
     timerCount.textContent = (n + 1) + ' / ' + total;
@@ -835,6 +900,85 @@
     }
   });
 
+  /* ===== Notes editing ===== */
+  var saveTimer = null;
+  notesBody.addEventListener('input', function(){
+    setStatus('', '编辑中…');
+    if (saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(function(){
+      var html = notesBody.innerHTML.trim();
+      // 把空内容视为"未编辑"，让源 HTML 接管显示
+      if (!html || html === '<br>' || /^<span class="empty">/.test(html)) {
+        writeNote(idx, null);
+        setStatus('', '已清空（回退源 HTML）');
+      } else {
+        writeNote(idx, html);
+        setStatus('saved', '✓ 已保存到本地');
+      }
+    }, 400);
+  });
+  // 第一次 focus 时清掉 placeholder
+  notesBody.addEventListener('focus', function(){
+    if (notesBody.querySelector('.empty')) {
+      notesBody.innerHTML = '<p></p>';
+      var range = document.createRange();
+      range.selectNodeContents(notesBody.firstChild);
+      var sel = window.getSelection();
+      sel.removeAllRanges(); sel.addRange(range);
+    }
+  });
+  // 阻止编辑时按方向键翻页
+  notesBody.addEventListener('keydown', function(e){ e.stopPropagation(); });
+
+  document.getElementById('notes-copy').addEventListener('click', function(){
+    var text = notesBody.innerText.trim();
+    function fallback(){
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); setStatus('saved', '✓ 已复制 ' + text.length + ' 字'); }
+      catch(e) { setStatus('', '复制失败，请手动选中'); }
+      ta.remove();
+    }
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(
+        function(){ setStatus('saved', '✓ 已复制 ' + text.length + ' 字到剪贴板'); },
+        fallback
+      );
+    } else { fallback(); }
+  });
+
+  document.getElementById('notes-export').addEventListener('click', function(){
+    var all = readAllNotes();
+    var lines = [];
+    lines.push('<!-- 导出于 ' + new Date().toLocaleString() + ' -->');
+    lines.push('<!-- 把每段 <aside class="notes"> 粘回对应 .slide 末尾 -->');
+    lines.push('');
+    for (var i = 0; i < total; i++) {
+      var html = Object.prototype.hasOwnProperty.call(all, i) ? all[i] : (slideMeta[i].notes || '');
+      lines.push('<!-- Slide ' + (i+1) + ' · ' + (slideMeta[i].title || '') + ' -->');
+      lines.push('<aside class="notes">');
+      lines.push(html || '  <!-- 待写 -->');
+      lines.push('</aside>');
+      lines.push('');
+    }
+    var blob = new Blob([lines.join('\\n')], { type: 'text/html;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'notes-export.html';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    setStatus('saved', '✓ 已导出 notes-export.html');
+  });
+
+  document.getElementById('notes-revert').addEventListener('click', function(){
+    if (!confirm('放弃本页的本地编辑，恢复到 HTML 源里的原始逐字稿？')) return;
+    writeNote(idx, null);
+    var src = slideMeta[idx].notes;
+    notesBody.innerHTML = src || '<span class="empty">（这一页还没有逐字稿，点这里开始写）</span>';
+    setStatus('', '已还原源 HTML');
+  });
+
   /* ===== Keyboard ===== */
   document.addEventListener('keydown', function(e){
     if (e.metaKey || e.ctrlKey || e.altKey) return;
@@ -870,9 +1014,14 @@
 </body></html>`;
     }
 
-    function fullscreen(){ const el=document.documentElement;
-      if (!document.fullscreenElement) el.requestFullscreen&&el.requestFullscreen();
-      else document.exitFullscreen&&document.exitFullscreen();
+    function fullscreen(){
+      // 优先全屏 .deck 元素（在 iframe 里也能正确铺满父窗口）；fallback 到 documentElement
+      const el = deck || document.documentElement;
+      if (!document.fullscreenElement) {
+        (el.requestFullscreen || el.webkitRequestFullscreen)?.call(el);
+      } else {
+        (document.exitFullscreen || document.webkitExitFullscreen)?.call(document);
+      }
     }
 
     // theme cycling

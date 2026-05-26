@@ -88,6 +88,12 @@ All themes define the same variables: `--bg`, `--bg-soft`, `--surface`,
 | `vaporwave` | 深紫 + 粉红青蓝渐变 + 晕染光斑。 | 音乐、潮流艺术、A E S T H E T I C |
 | `y2k-chrome` | 银铬渐变 + 彩虹 accent + 大圆角 + Space Grotesk。 | 千禧怀旧、时尚品牌、Gen-Z |
 
+### Brand themes
+
+| name | description | when to use |
+|---|---|---|
+| `sainstore` | 暖米底 + SainStore 红 #E7380D / 蓝 #1D7FB7 / 黄 #F5AB18 三色 + Inter / 思源黑体。 | SainStore / Genmitsu 品牌内部周报、产品发布、培训材料 |
+
 ## How to apply
 
 ```html

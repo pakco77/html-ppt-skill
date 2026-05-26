@@ -10,6 +10,19 @@
 **License:** MIT
 **中文文档:** [README.zh-CN.md](README.zh-CN.md)
 
+> ## 🙏 About This Fork
+>
+> This is a fork of [**lewislulu/html-ppt-skill**](https://github.com/lewislulu/html-ppt-skill).
+> All credit for the core work — 36 themes, 31 layouts, 47 animations, presenter mode — goes to **lewis** ([@lewislulu](https://github.com/lewislulu)).
+>
+> This fork adds three small things on top:
+>
+> - 🎨 **Interactive WebUI** — `templates/style-picker.html`: browse themes × layouts × full-decks visually, copy install/usage commands in one click.
+> - 🏢 **+1 theme & +3 corporate decks** — `sainstore` theme, plus `sainstore` / `reliable-traits` / `office-security-training` full-deck templates.
+> - 🐛 **Stability fixes** for `presenter-mode-reveal`.
+>
+> Positioning: a slightly more turn-key experience than the upstream skill, but **far lighter than html-anything** — no extra runtime, still pure static HTML/CSS/JS, no build step.
+
 ![html-ppt — cover with live previews](docs/readme/hero.gif)
 
 > One command installs **37 themes × 20 canvas FX × 31 layouts × 16 full decks + presenter mode**. Every preview above is a live iframe of a real template file rendering inside the deck — no screenshots, no mock-ups.

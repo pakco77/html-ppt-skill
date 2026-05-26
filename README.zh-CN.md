@@ -9,6 +9,19 @@
 **协议：** MIT
 **English docs:** [README.md](README.md)
 
+> ## 🙏 关于本 Fork
+>
+> 本仓库 fork 自 [**lewislulu/html-ppt-skill**](https://github.com/lewislulu/html-ppt-skill)。
+> 36 套主题、31 布局、47 动效、演讲者模式等核心内容，全部归原作者 **lewis**（[@lewislulu](https://github.com/lewislulu)）所有。
+>
+> 本 fork 在原作之上做了三件小事：
+>
+> - 🎨 **交互式 WebUI** —— `templates/style-picker.html`：可视化浏览 主题 × 布局 × 完整 deck，一键复制安装命令与使用提示语。
+> - 🏢 **新增 1 主题 + 3 企业 deck** —— `sainstore` 主题，外加 `sainstore` / `reliable-traits` / `office-security-training` 三套完整 deck。
+> - 🐛 修复 `presenter-mode-reveal` 的若干稳定性问题。
+>
+> 定位：在原 skill 之上**多了一点 WebUI 体验和几套公司模板**，但**比 html-anything 轻得多** —— 不引入额外运行时，仍是纯静态 HTML/CSS/JS，无需构建。
+
 ![html-ppt 封面 · 实时预览](docs/readme/hero.gif)
 
 > 一行命令装好 **37 主题 × 20 Canvas FX × 31 布局 × 16 完整 deck + 演讲者模式**。

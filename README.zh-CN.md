@@ -29,6 +29,40 @@
 >
 > 定位：在原 skill 之上**多了一点 WebUI 体验和几套公司模板**，但**比 html-anything 轻得多** —— 不引入额外运行时，仍是纯静态 HTML/CSS/JS，无需构建。
 
+## 🎨 WebUI 选择器（本 fork 的主要新增）
+
+`templates/style-picker.html` 是一个单文件静态页面，可以可视化浏览全部主题 / 模板 / 布局，点击任意卡片即把"安装命令 + 一句话 prompt"复制到剪贴板，直接粘给 AI agent。
+
+| 主题（37 套） | 完整 Deck（16 套） | 页面布局（31 种） |
+|---|---|---|
+| ![主题 Tab](docs/readme/webui/01-themes.png) | ![完整 Deck Tab](docs/readme/webui/02-templates.png) | ![布局 Tab](docs/readme/webui/03-layouts.png) |
+
+### 怎么启动
+
+skill 装好之后，文件路径在：
+
+```
+~/.claude/skills/html-ppt/templates/style-picker.html      # Claude Code
+~/.codex/skills/html-ppt/templates/style-picker.html       # Codex
+~/.hermes/skills/html-ppt/templates/style-picker.html      # Hermes Agent
+```
+
+任选一种方式打开：
+
+```bash
+# 1) 直接 open 文件（只能浏览卡片，iframe 实时预览需要本地服务器）
+open ~/.claude/skills/html-ppt/templates/style-picker.html
+
+# 2) 推荐 —— 启动一个本地静态服务器，iframe 预览能加载
+cd ~/.claude/skills/html-ppt && python3 -m http.server 8000
+# 然后访问：  http://localhost:8000/templates/style-picker.html
+
+# 或用 Node：
+cd ~/.claude/skills/html-ppt && npx --yes serve -l 8000
+```
+
+点任意卡片 → 安装命令 + 现成的 prompt 已复制到剪贴板 → 粘给 AI agent → 完成。
+
 ![html-ppt 封面 · 实时预览](docs/readme/hero.gif)
 
 > 一行命令装好 **37 主题 × 20 Canvas FX × 31 布局 × 16 完整 deck + 演讲者模式**。

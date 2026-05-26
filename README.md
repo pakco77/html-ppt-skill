@@ -30,6 +30,40 @@
 >
 > Positioning: a slightly more turn-key experience than the upstream skill, but **far lighter than html-anything** — no extra runtime, still pure static HTML/CSS/JS, no build step.
 
+## 🎨 The WebUI Picker (this fork's main addition)
+
+A single static HTML file at `templates/style-picker.html` lets you browse all themes / templates / layouts visually, then copy a ready-made prompt to paste into your AI agent.
+
+| Themes (37) | Full-Deck Templates (16) | Page Layouts (31) |
+|---|---|---|
+| ![Themes tab](docs/readme/webui/01-themes.png) | ![Full-deck templates tab](docs/readme/webui/02-templates.png) | ![Layouts tab](docs/readme/webui/03-layouts.png) |
+
+### How to launch it
+
+After you (or your AI agent) install this skill, the file lives at:
+
+```
+~/.claude/skills/html-ppt/templates/style-picker.html      # Claude Code
+~/.codex/skills/html-ppt/templates/style-picker.html       # Codex
+~/.hermes/skills/html-ppt/templates/style-picker.html      # Hermes Agent
+```
+
+Pick one of these to open it:
+
+```bash
+# 1) Just open the file (works for browsing only — previews in iframes need a server)
+open ~/.claude/skills/html-ppt/templates/style-picker.html
+
+# 2) Recommended — serve the skill folder so iframe previews load (any port, any agent)
+cd ~/.claude/skills/html-ppt && python3 -m http.server 8000
+# then visit:  http://localhost:8000/templates/style-picker.html
+
+# Or with Node:
+cd ~/.claude/skills/html-ppt && npx --yes serve -l 8000
+```
+
+Click any card → the install command + a ready prompt is copied to your clipboard. Paste it into your AI agent and you're done.
+
 ![html-ppt — cover with live previews](docs/readme/hero.gif)
 
 > One command installs **37 themes × 20 canvas FX × 31 layouts × 16 full decks + presenter mode**. Every preview above is a live iframe of a real template file rendering inside the deck — no screenshots, no mock-ups.

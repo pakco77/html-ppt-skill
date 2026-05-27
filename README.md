@@ -1,17 +1,18 @@
-# html-ppt-skill — *with WebUI Picker & Corporate Decks*
+# html-ppt-skill — *WebUI Picker · Corporate Decks · Guizang Magazine & Swiss*
 
 [![Forked from lewislulu/html-ppt-skill](https://img.shields.io/badge/forked%20from-lewislulu%2Fhtml--ppt--skill-blue?logo=github)](https://github.com/lewislulu/html-ppt-skill)
+[![Integrates op7418/guizang-ppt-skill](https://img.shields.io/badge/integrates-op7418%2Fguizang--ppt--skill-orange?logo=github)](https://github.com/op7418/guizang-ppt-skill)
 [![Upstream stars](https://img.shields.io/github/stars/lewislulu/html-ppt-skill?label=upstream%20stars&style=social)](https://github.com/lewislulu/html-ppt-skill/stargazers)
-[![Upstream forks](https://img.shields.io/github/forks/lewislulu/html-ppt-skill?label=upstream%20forks&style=social)](https://github.com/lewislulu/html-ppt-skill/network/members)
+[![Guizang stars](https://img.shields.io/github/stars/op7418/guizang-ppt-skill?label=guizang%20stars&style=social)](https://github.com/op7418/guizang-ppt-skill/stargazers)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-> 🙏 **All credit to [@lewislulu](https://github.com/lewislulu)** — this fork only adds a WebUI picker, 1 theme, and 1 brand deck on top of his work.
+> 🙏 **Credit to [@lewislulu](https://github.com/lewislulu)** (core skill) and **[@op7418 歸藏](https://github.com/op7418)** (magazine + swiss decks). This fork stitches them together with a WebUI picker.
 
 > A world-class AgentSkill for producing professional HTML presentations in
-> **37 themes**, **16 full-deck templates**, **31 page layouts**,
-> **47 animations** (27 CSS + 20 canvas FX), and a **true presenter mode**
-> with pixel-perfect previews + speaker script + timer — all pure static
-> HTML/CSS/JS, no build step.
+> **37 themes**, **25 full-deck templates** (16 native + 9 guizang variants),
+> **31 page layouts**, **47 animations** (27 CSS + 20 canvas FX), and a
+> **true presenter mode** with pixel-perfect previews + speaker script + timer
+> — all pure static HTML/CSS/JS, no build step.
 
 **Author:** lewis &lt;sudolewis@gmail.com&gt;
 **License:** MIT
@@ -19,22 +20,25 @@
 
 > ## 🙏 About This Fork
 >
-> This is a fork of [**lewislulu/html-ppt-skill**](https://github.com/lewislulu/html-ppt-skill).
-> All credit for the core work — 36 themes, 31 layouts, 47 animations, presenter mode — goes to **lewis** ([@lewislulu](https://github.com/lewislulu)).
+> This fork stitches together two excellent upstream skills + adds a WebUI:
 >
-> This fork adds three small things on top:
+> - 🎨 **Core skill** — [**lewislulu/html-ppt-skill**](https://github.com/lewislulu/html-ppt-skill): 36 themes, 31 layouts, 47 animations, presenter mode.
+> - 🪶 **Magazine & Swiss decks** — [**op7418/guizang-ppt-skill**](https://github.com/op7418/guizang-ppt-skill) (歸藏): 2 deck templates × 9 color variants, WebGL fluid/grid backgrounds.
+>
+> What this fork adds on top:
 >
 > - 🎨 **Interactive WebUI** — `templates/style-picker.html`: browse themes × layouts × full-decks visually, copy install/usage commands in one click.
-> - 🏢 **+1 theme & +1 brand deck** — `sainstore` theme, plus `sainstore` full-deck template.
+> - 🏢 **+1 theme & +1 brand deck** — `sainstore` theme + `sainstore` full-deck template.
+> - 🪶 **+9 guizang deck variants** — `guizang-magazine` (5 colors) + `guizang-swiss` (4 colors), wired into the picker with author attribution.
 > - 🐛 **Stability fixes** for `presenter-mode-reveal`.
 >
-> Positioning: a slightly more turn-key experience than the upstream skill, but **far lighter than html-anything** — no extra runtime, still pure static HTML/CSS/JS, no build step.
+> Positioning: a slightly more turn-key experience than either upstream alone, but **far lighter than html-anything** — no extra runtime, still pure static HTML/CSS/JS, no build step.
 
 ## 🎨 The WebUI Picker (this fork's main addition)
 
 A single static HTML file at `templates/style-picker.html` lets you browse all themes / templates / layouts visually, then copy a ready-made prompt to paste into your AI agent.
 
-| Themes (37) | Full-Deck Templates (16) | Page Layouts (31) |
+| Themes (37) | Full-Deck Templates (25) | Page Layouts (31) |
 |---|---|---|
 | ![Themes tab](docs/readme/webui/01-themes.png) | ![Full-deck templates tab](docs/readme/webui/02-templates.png) | ![Layouts tab](docs/readme/webui/03-layouts.png) |
 
@@ -66,7 +70,7 @@ Click any card → the install command + a ready prompt is copied to your clipbo
 
 ![html-ppt — cover with live previews](docs/readme/hero.gif)
 
-> One command installs **37 themes × 20 canvas FX × 31 layouts × 16 full decks + presenter mode**. Every preview above is a live iframe of a real template file rendering inside the deck — no screenshots, no mock-ups.
+> One command installs **37 themes × 20 canvas FX × 31 layouts × 25 full decks + presenter mode**. Every preview above is a live iframe of a real template file rendering inside the deck — no screenshots, no mock-ups.
 
 ## 🎤 Presenter Mode (new!)
 
@@ -117,7 +121,7 @@ that supports AgentSkills can author presentations by asking things like:
 |---|---|---|
 | 🎤 **Presenter mode** | **NEW** | `S` key / `?preview=N` |
 | 🎨 **Themes** | **37** | `assets/themes/*.css` |
-| 📑 **Full-deck templates** | **16** | `templates/full-decks/<name>/` |
+| 📑 **Full-deck templates** | **25** | `templates/full-decks/<name>/` |
 | 🧩 **Single-page layouts** | **31** | `templates/single-page/*.html` |
 | ✨ **CSS animations** | **27** | `assets/animations/animations.css` |
 | 💥 **Canvas FX animations** | **20** | `assets/animations/fx/*.js` |

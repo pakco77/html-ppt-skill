@@ -1,16 +1,18 @@
-# html-ppt-skill · 加了 WebUI 选择器和企业模板
+# html-ppt-skill · WebUI 选择器 · 企业模板 · 歸藏杂志/瑞士风
 
 [![Fork 自 lewislulu/html-ppt-skill](https://img.shields.io/badge/fork%20%E8%87%AA-lewislulu%2Fhtml--ppt--skill-blue?logo=github)](https://github.com/lewislulu/html-ppt-skill)
+[![集成 op7418/guizang-ppt-skill](https://img.shields.io/badge/%E9%9B%86%E6%88%90-op7418%2Fguizang--ppt--skill-orange?logo=github)](https://github.com/op7418/guizang-ppt-skill)
 [![上游 stars](https://img.shields.io/github/stars/lewislulu/html-ppt-skill?label=%E4%B8%8A%E6%B8%B8%20stars&style=social)](https://github.com/lewislulu/html-ppt-skill/stargazers)
-[![上游 forks](https://img.shields.io/github/forks/lewislulu/html-ppt-skill?label=%E4%B8%8A%E6%B8%B8%20forks&style=social)](https://github.com/lewislulu/html-ppt-skill/network/members)
+[![歸藏 stars](https://img.shields.io/github/stars/op7418/guizang-ppt-skill?label=%E6%AD%B8%E8%97%8F%20stars&style=social)](https://github.com/op7418/guizang-ppt-skill/stargazers)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-> 🙏 **核心功劳全部归 [@lewislulu](https://github.com/lewislulu)** —— 本 fork 只是在他的作品之上加了一个 WebUI 选择器、1 套主题和 1 套品牌 deck。
+> 🙏 **核心功劳归 [@lewislulu](https://github.com/lewislulu)**（核心 skill）和 **[@op7418 歸藏](https://github.com/op7418)**（杂志/瑞士 deck）。本 fork 把两份优秀的 skill 缝在一起，再补一个 WebUI 选择器。
 
 > 一款专业级的 AgentSkill，让 AI 做出真正能打的 HTML 演示文稿。
-> **37 套主题**、**16 套完整 deck 模板**、**31 种页面布局**、**47 个动效**
-> (27 个 CSS + 20 个 Canvas FX)，加上全新的 **演讲者模式** —— 像素级
-> 完美预览 + 逐字稿提词器 + 计时器。纯静态 HTML/CSS/JS，无需构建。
+> **37 套主题**、**25 套完整 deck 模板**（16 原生 + 9 歸藏色板）、
+> **31 种页面布局**、**47 个动效**（27 CSS + 20 Canvas FX），加上全新的
+> **演讲者模式** —— 像素级完美预览 + 逐字稿提词器 + 计时器。
+> 纯静态 HTML/CSS/JS，无需构建。
 
 **作者：** lewis &lt;sudolewis@gmail.com&gt;
 **协议：** MIT
@@ -18,22 +20,25 @@
 
 > ## 🙏 关于本 Fork
 >
-> 本仓库 fork 自 [**lewislulu/html-ppt-skill**](https://github.com/lewislulu/html-ppt-skill)。
-> 36 套主题、31 布局、47 动效、演讲者模式等核心内容，全部归原作者 **lewis**（[@lewislulu](https://github.com/lewislulu)）所有。
+> 本 fork 把两个优秀的上游 skill 缝在一起，再加一个 WebUI：
 >
-> 本 fork 在原作之上做了三件小事：
+> - 🎨 **核心 skill** —— [**lewislulu/html-ppt-skill**](https://github.com/lewislulu/html-ppt-skill)：36 主题、31 布局、47 动效、演讲者模式。
+> - 🪶 **杂志 & 瑞士 deck** —— [**op7418/guizang-ppt-skill**](https://github.com/op7418/guizang-ppt-skill)（歸藏）：2 套 deck 模板 × 9 色板，WebGL 流体/网格背景。
+>
+> 本 fork 在两份原作之上额外做的事：
 >
 > - 🎨 **交互式 WebUI** —— `templates/style-picker.html`：可视化浏览 主题 × 布局 × 完整 deck，一键复制安装命令与使用提示语。
 > - 🏢 **新增 1 主题 + 1 品牌 deck** —— `sainstore` 主题，外加 `sainstore` 一套完整 deck。
+> - 🪶 **新增 9 套歸藏色板 deck** —— `guizang-magazine`（5 色） + `guizang-swiss`（4 色），已接入 picker，含作者署名。
 > - 🐛 修复 `presenter-mode-reveal` 的若干稳定性问题。
 >
-> 定位：在原 skill 之上**多了一点 WebUI 体验和几套公司模板**，但**比 html-anything 轻得多** —— 不引入额外运行时，仍是纯静态 HTML/CSS/JS，无需构建。
+> 定位：在两份原 skill 之上**多了 WebUI 体验和几套公司/歸藏模板**，但**比 html-anything 轻得多** —— 不引入额外运行时，仍是纯静态 HTML/CSS/JS，无需构建。
 
 ## 🎨 WebUI 选择器（本 fork 的主要新增）
 
 `templates/style-picker.html` 是一个单文件静态页面，可以可视化浏览全部主题 / 模板 / 布局，点击任意卡片即把"安装命令 + 一句话 prompt"复制到剪贴板，直接粘给 AI agent。
 
-| 主题（37 套） | 完整 Deck（16 套） | 页面布局（31 种） |
+| 主题（37 套） | 完整 Deck（25 套） | 页面布局（31 种） |
 |---|---|---|
 | ![主题 Tab](docs/readme/webui/01-themes.png) | ![完整 Deck Tab](docs/readme/webui/02-templates.png) | ![布局 Tab](docs/readme/webui/03-layouts.png) |
 
@@ -65,7 +70,7 @@ cd ~/.claude/skills/html-ppt && npx --yes serve -l 8000
 
 ![html-ppt 封面 · 实时预览](docs/readme/hero.gif)
 
-> 一行命令装好 **37 主题 × 20 Canvas FX × 31 布局 × 16 完整 deck + 演讲者模式**。
+> 一行命令装好 **37 主题 × 20 Canvas FX × 31 布局 × 25 完整 deck + 演讲者模式**。
 > 上图里的每一个预览都是真实的 iframe 加载真实模板文件 —— 不是截图，不是色卡。
 
 ## 🎤 演讲者模式（全新）
@@ -114,7 +119,7 @@ npx skills add https://github.com/pakco77/html-ppt-skill
 |---|---|---|
 | 🎤 **演讲者模式** | **新增** | `S` 键 / `?preview=N` |
 | 🎨 **主题** | **37** | `assets/themes/*.css` |
-| 📑 **完整 deck 模板** | **16** | `templates/full-decks/<name>/` |
+| 📑 **完整 deck 模板** | **25** | `templates/full-decks/<name>/` |
 | 🧩 **单页布局** | **31** | `templates/single-page/*.html` |
 | ✨ **CSS 动画** | **27** | `assets/animations/animations.css` |
 | 💥 **Canvas FX 动画** | **20** | `assets/animations/fx/*.js` |
@@ -138,9 +143,9 @@ npx skills add https://github.com/pakco77/html-ppt-skill
 换皮。在 `templates/theme-showcase.html` 里可以浏览全部（每一页用独立 iframe
 渲染，避免样式互相污染）。
 
-![16 套完整 deck 模板](docs/readme/templates.png)
+![25 套完整 deck 模板](docs/readme/templates.png)
 
-### 16 套完整 deck 模板
+### 25 套完整 deck 模板
 
 8 个从真实作品提炼的视觉语言，7 个通用场景脚手架：
 
@@ -248,7 +253,7 @@ html-ppt-skill/
 │   ├── themes.md                 37 主题 + 使用场景
 │   ├── layouts.md                31 布局
 │   ├── animations.md             27 CSS + 20 FX 目录
-│   ├── full-decks.md             16 完整 deck 模板
+│   ├── full-decks.md             25 完整 deck 模板
 │   ├── presenter-mode.md         🎤 演讲者模式 + 逐字稿指南
 │   └── authoring-guide.md        完整工作流
 ├── assets/

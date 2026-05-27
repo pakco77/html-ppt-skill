@@ -10,7 +10,7 @@
 
   /* ───── Header ───── */
   header{position:sticky;top:0;z-index:50;background:rgba(11,12,16,.92);backdrop-filter:blur(12px);
-    border-bottom:1px solid rgba(255,255,255,.08);padding:16px 32px 0;
+    border-bottom:1px solid rgba(255,255,255,.08);padding:16px 32px 12px;
     display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;row-gap:14px}
   header .brand h1{margin:0;font-size:20px;letter-spacing:-.01em;font-weight:800}
   header .brand h1 .accent{background:linear-gradient(135deg,#a78bfa 0%,#f472b6 100%);
@@ -86,6 +86,11 @@
   .meta .name{margin:0;font-size:13px;font-weight:700;letter-spacing:-.01em}
   .meta .desc{margin:4px 0 0;font-size:11px;color:#8a90a4;line-height:1.5}
   .meta .id{margin:6px 0 0;font-size:10px;color:#5a6076;font-family:'JetBrains Mono',monospace}
+  .meta .author{margin:4px 0 0;font-size:10px;color:#6a7086;font-family:'JetBrains Mono',monospace;letter-spacing:.05em}
+  .meta .feat{margin:4px 0 0;font-size:10px;display:flex;gap:6px;flex-wrap:wrap}
+  .meta .feat span{padding:1px 6px;border-radius:3px;font-family:'JetBrains Mono',monospace;letter-spacing:.03em}
+  .meta .feat .yes{background:rgba(26,175,108,.15);color:#1aaf6c}
+  .meta .feat .no{background:rgba(255,255,255,.05);color:#5a6076}
   .empty{padding:80px 20px;text-align:center;color:#5a6076}
 
   /* Modal */
@@ -222,15 +227,15 @@ const INSTALL_CMD = 'npx skills add ' + REPO_URL;
 const I18N = {
   zh: {
     htmlLang: 'zh-CN',
-    sub: '37 主题 · 16 完整 Deck · 给 Agent 一句话直接生成 PPT · ',
-    forkLink: 'fork 自 @lewislulu',
+    sub: '给 Agent 一句话直接生成 PPT · Made by Pakco · ',
+    forkLink: 'Fork from @lewislulu & @guizang',
     installTitle: '点击复制安装命令',
     copy: '复制',
     copied: '✓ 已复制',
     search: '搜索名称…',
     sizeS: '小', sizeM: '中', sizeL: '大',
     tabThemes: '🎨 主题 (37)',
-    tabDecks: '📑 模板 (16)',
+    tabDecks: '📑 模板 (25)',
     tabGuide: '📖 使用说明',
     empty: '没有匹配的风格',
     toastDefault: '已复制 Prompt — 粘到 Claude / Codex / Hermes 即用',
@@ -240,6 +245,8 @@ const I18N = {
     toastPromptPasted: '已复制 Prompt — 粘到 Agent 即用',
     toastCardCopied: (label)=>`已复制「${label}」Prompt — 粘到 Agent 即用`,
     copyPrompt: '📋 复制 Prompt',
+    featPresenter: '🎤 演讲者模式',
+    featNoPresenter: '无演讲者模式',
     zoomHint: 'CLICK TO ZOOM',
     badgeScenario: 'scenario',
     badgeExtracted: 'extracted',
@@ -253,6 +260,8 @@ const I18N = {
       linkZip: '⬇️ 下载 ZIP',
       linkRelease: '🏷 Releases',
       linkUpstream: '🙏 致敬上游 lewislulu',
+      linkGuizang: '🙏 致敬上游 guizang',
+      terminalTip: '💻 <b style="color:#cfd4e2">如何打开终端：</b>Mac → 聚焦搜索（⌘ Space）输入"终端"或"Terminal"；Windows → 按 Win 键搜索"PowerShell"或"cmd"。',
       h2: '如何让 Agent 用',
       h2body: '<b style="color:#fff">最快路径：</b>到 <code>🎨 主题</code> 或 <code>📑 模板</code> 标签页，点任意一张卡片就把对应的 Prompt 复制到剪贴板了。直接粘到你的 Agent 对话框，把方括号 <code>[在此粘贴你的内容大纲]</code> 换成你自己的内容即可。',
       h2steps: '<b style="color:#cfd4e2">四步流程：</b>',
@@ -307,19 +316,26 @@ const I18N = {
 - 输出：基于该模板复制一份新 deck，替换为我的内容
 - 保留模板的 .tpl-${name} 作用域 CSS 和所有视觉元素
 - 内容：[在此粘贴你的内容大纲 / 关键数据 / 章节结构]
+请生成完整可直接浏览器打开的 HTML。`,
+    promptGuizang: (id, label, deckDir, themeKey) => `请使用 guizang-ppt-skill 生成一份 PPT。
+- 风格 = ${deckDir === 'guizang-magazine' ? 'A · 电子杂志风' : 'B · 瑞士国际主义'}
+- 主题色 = ${label}（theme key: ${themeKey}）
+- 页数：8-12 页（你可按内容调整）
+- 输出：单文件 index.html，含 WebGL 背景和翻页
+- 内容：[在此粘贴你的内容大纲 / 主题方向 / 关键论点]
 请生成完整可直接浏览器打开的 HTML。`
   },
   en: {
     htmlLang: 'en',
-    sub: '37 themes · 16 full decks · one-line prompt → AI generates a PPT · ',
-    forkLink: 'fork from @lewislulu',
+    sub: 'One-line prompt → AI generates a PPT · Made by Pakco · ',
+    forkLink: 'Fork from @lewislulu & @guizang',
     installTitle: 'Click to copy install command',
     copy: 'Copy',
     copied: '✓ Copied',
     search: 'Search…',
     sizeS: 'S', sizeM: 'M', sizeL: 'L',
     tabThemes: '🎨 Themes (37)',
-    tabDecks: '📑 Decks (16)',
+    tabDecks: '📑 Decks (25)',
     tabGuide: '📖 How to use',
     empty: 'No matches',
     toastDefault: 'Prompt copied — paste into Claude / Codex / Hermes',
@@ -329,6 +345,8 @@ const I18N = {
     toastPromptPasted: 'Prompt copied — paste into your agent',
     toastCardCopied: (label)=>`Copied "${label}" prompt — paste into your agent`,
     copyPrompt: '📋 Copy Prompt',
+    featPresenter: '🎤 Presenter',
+    featNoPresenter: 'No presenter',
     zoomHint: 'CLICK TO ZOOM',
     badgeScenario: 'scenario',
     badgeExtracted: 'extracted',
@@ -342,6 +360,8 @@ const I18N = {
       linkZip: '⬇️ Download ZIP',
       linkRelease: '🏷 Releases',
       linkUpstream: '🙏 Upstream (lewislulu)',
+      linkGuizang: '🙏 Upstream (guizang)',
+      terminalTip: '💻 <b style="color:#cfd4e2">How to open a terminal:</b> Mac → Spotlight (⌘ Space) type "Terminal"; Windows → press Win key and search "PowerShell" or "cmd".',
       h2: 'How to make your agent use it',
       h2body: '<b style="color:#fff">Fastest path:</b> open the <code>🎨 Themes</code> or <code>📑 Decks</code> tab, click any card — the matching prompt is copied to your clipboard. Paste into your agent and replace the bracketed <code>[paste your outline here]</code> with your content.',
       h2steps: '<b style="color:#cfd4e2">Four steps:</b>',
@@ -396,11 +416,18 @@ Please return a complete HTML deck I can open in the browser.`,
 - output: copy this template into a new deck and replace with my content
 - keep the .tpl-${name} scoped CSS and all visual elements
 - content: [paste your outline / key data / section structure here]
+Please return a complete HTML deck I can open in the browser.`,
+    promptGuizang: (id, label, deckDir, themeKey) => `Please use guizang-ppt-skill to build me a deck.
+- style = ${deckDir === 'guizang-magazine' ? 'A · Magazine e-ink' : 'B · Swiss International Style'}
+- color theme = ${label} (theme key: ${themeKey})
+- pages: 8-12 (adjust to fit content)
+- output: single-file index.html with WebGL background and swipe navigation
+- content: [paste your outline / theme direction / key points here]
 Please return a complete HTML deck I can open in the browser.`
   }
 };
 
-/* ───── Data: 37 themes + 16 decks ─────
+/* ───── Data: 37 themes + 25 decks ─────
    Tuple: [id, zhLabel, enLabel, descZh, descEn]
    When enLabel is null, the id (which is already English) is used as the EN label.
 */
@@ -445,22 +472,33 @@ const THEMES = [
 ];
 
 const DECKS = [
-  ['xhs-white-editorial',      '白底杂志风',         'XHS White Editorial',     'extracted', '小红书图文 / 生活方式',    'xhs post / lifestyle'],
-  ['graphify-dark-graph',      '暗底知识图谱',       'Dark Knowledge Graph',    'extracted', 'AI / 图谱 / 数据产品',     'AI / graph / data product'],
-  ['knowledge-arch-blueprint', '奶油蓝图架构',       'Cream Blueprint Arch',    'extracted', '架构图 / 系统思考',         'architecture / systems thinking'],
-  ['hermes-cyber-terminal',    '暗终端 cyber',       'Dark Cyber Terminal',     'extracted', 'devtool / agent demo',      'devtool / agent demo'],
-  ['obsidian-claude-gradient', 'GitHub 暗紫渐变',    'GitHub Dark Purple',      'extracted', '工具讲解 / LLM 产品',       'tooling / LLM product'],
-  ['testing-safety-alert',     '红琥珀警示',         'Red-Amber Safety Alert',  'extracted', '安全 / 事故复盘 / AI safety','safety / incident review / AI safety'],
-  ['xhs-pastel-card',          '柔和马卡龙',         'Soft Pastel Card',        'extracted', '生活方式 / 软情绪',         'lifestyle / soft tone'],
-  ['dir-key-nav-minimal',      '方向键 8 色极简',    'Dir-Key 8-color Minimal', 'extracted', 'keynote / 一页一观点',      'keynote / one point per slide'],
-  ['pitch-deck',               'Pitch Deck',         null,                      'scenario',  '融资 / 创业路演',           'fundraising / startup pitch'],
-  ['product-launch',           'Product Launch',     null,                      'scenario',  '产品发布 / 发布会',         'product launch / keynote'],
-  ['tech-sharing',             '技术分享',           'Tech Sharing',            'scenario',  '内部技术分享 / 大会演讲',   'internal tech talk / conference'],
-  ['weekly-report',            'Weekly Report',      null,                      'scenario',  '周报 / 业务复盘',           'weekly report / business review'],
-  ['xhs-post',                 '小红书 9 屏 3:4',    'XHS 9-card 3:4',          'scenario',  '小红书 / IG 轮播',          'xhs / IG carousel'],
-  ['course-module',            '课程模块',           'Course Module',           'scenario',  '在线课程 / workshop',       'online course / workshop'],
-  ['presenter-mode-reveal',    '🎤 演讲者模式',      '🎤 Presenter Mode',       'scenario',  '带逐字稿 / speaker view',   'speaker notes / speaker view'],
-  ['sainstore',                'SainStore 汇报',     'SainStore Report',        'scenario',  'SainStore 品牌 / 三色圆环 / 汇报', 'SainStore brand / 3-color rings / report']
+  ['xhs-white-editorial',      '白底杂志风',         'XHS White Editorial',     'extracted', '小红书图文 / 生活方式',    'xhs post / lifestyle',              'Lewis'],
+  ['graphify-dark-graph',      '暗底知识图谱',       'Dark Knowledge Graph',    'extracted', 'AI / 图谱 / 数据产品',     'AI / graph / data product',         'Lewis'],
+  ['knowledge-arch-blueprint', '奶油蓝图架构',       'Cream Blueprint Arch',    'extracted', '架构图 / 系统思考',         'architecture / systems thinking',   'Lewis'],
+  ['hermes-cyber-terminal',    '暗终端 cyber',       'Dark Cyber Terminal',     'extracted', 'devtool / agent demo',      'devtool / agent demo',              'Lewis'],
+  ['obsidian-claude-gradient', 'GitHub 暗紫渐变',    'GitHub Dark Purple',      'extracted', '工具讲解 / LLM 产品',       'tooling / LLM product',             'Lewis'],
+  ['testing-safety-alert',     '红琥珀警示',         'Red-Amber Safety Alert',  'extracted', '安全 / 事故复盘 / AI safety','safety / incident review / AI safety','Lewis'],
+  ['xhs-pastel-card',          '柔和马卡龙',         'Soft Pastel Card',        'extracted', '生活方式 / 软情绪',         'lifestyle / soft tone',             'Lewis'],
+  ['dir-key-nav-minimal',      '方向键 8 色极简',    'Dir-Key 8-color Minimal', 'extracted', 'keynote / 一页一观点',      'keynote / one point per slide',     'Lewis'],
+  ['pitch-deck',               'Pitch Deck',         null,                      'scenario',  '融资 / 创业路演',           'fundraising / startup pitch',       'Lewis'],
+  ['product-launch',           'Product Launch',     null,                      'scenario',  '产品发布 / 发布会',         'product launch / keynote',          'Lewis'],
+  ['tech-sharing',             '技术分享',           'Tech Sharing',            'scenario',  '内部技术分享 / 大会演讲',   'internal tech talk / conference',   'Lewis'],
+  ['weekly-report',            'Weekly Report',      null,                      'scenario',  '周报 / 业务复盘',           'weekly report / business review',   'Lewis'],
+  ['xhs-post',                 '小红书 9 屏 3:4',    'XHS 9-card 3:4',          'scenario',  '小红书 / IG 轮播',          'xhs / IG carousel',                'Lewis'],
+  ['course-module',            '课程模块',           'Course Module',           'scenario',  '在线课程 / workshop',       'online course / workshop',          'Lewis'],
+  ['presenter-mode-reveal',    '🎤 演讲者模式',      '🎤 Presenter Mode',       'scenario',  '带逐字稿 / speaker view',   'speaker notes / speaker view',      'Lewis'],
+  ['sainstore',                'SainStore 汇报',     'SainStore Report',        'scenario',  'SainStore 品牌 / 三色圆环 / 汇报', 'SainStore brand / 3-color rings / report', 'SainStore'],
+  // ── Guizang · Style A 电子杂志风 (by 歸藏) ──
+  ['guizang-magazine-ink',    '歸藏·墨水经典',   'Guizang · Ink Classic',    'extracted', '杂志×电子墨水 · WebGL流体 / 默认',        'magazine×e-ink · WebGL fluid / default',       '歸藏', 'guizang-magazine', 'ink'],
+  ['guizang-magazine-indigo', '歸藏·靛蓝瓷',     'Guizang · Indigo',         'extracted', '杂志×电子墨水 · 冷静理性的靛蓝',           'magazine×e-ink · rational indigo',              '歸藏', 'guizang-magazine', 'indigo'],
+  ['guizang-magazine-forest', '歸藏·森林墨',     'Guizang · Forest Ink',     'extracted', '杂志×电子墨水 · 国家地理感的森绿',          'magazine×e-ink · National Geographic green',    '歸藏', 'guizang-magazine', 'forest'],
+  ['guizang-magazine-kraft',  '歸藏·牛皮纸',     'Guizang · Kraft Paper',    'extracted', '杂志×电子墨水 · 老笔记本的温暖棕',          'magazine×e-ink · warm kraft brown',             '歸藏', 'guizang-magazine', 'kraft'],
+  ['guizang-magazine-dune',   '歸藏·沙丘',       'Guizang · Dune',           'extracted', '杂志×电子墨水 · 沙漠黄昏的克制灰',          'magazine×e-ink · restrained desert grey',       '歸藏', 'guizang-magazine', 'dune'],
+  // ── Guizang · Style B 瑞士国际主义 (by 歸藏) ──
+  ['guizang-swiss-ikb',       '歸藏·克莱因蓝',   'Guizang · IKB Blue',       'extracted', '瑞士国际主义 · WebGL网格 / 克莱因蓝',       'Swiss Style · WebGL grid / Klein Blue',         '歸藏', 'guizang-swiss', 'ikb'],
+  ['guizang-swiss-lemon',     '歸藏·柠檬黄',     'Guizang · Lemon',          'extracted', '瑞士国际主义 · WebGL网格 / 柠檬黄',         'Swiss Style · WebGL grid / Cadmium Yellow',     '歸藏', 'guizang-swiss', 'lemon'],
+  ['guizang-swiss-green',     '歸藏·柠檬绿',     'Guizang · Lemon Green',    'extracted', '瑞士国际主义 · WebGL网格 / 柠檬绿',         'Swiss Style · WebGL grid / Highlighter Green',  '歸藏', 'guizang-swiss', 'green'],
+  ['guizang-swiss-orange',    '歸藏·安全橙',     'Guizang · Safety Orange',  'extracted', '瑞士国际主义 · WebGL网格 / 安全橙',          'Swiss Style · WebGL grid / Safety Orange',      '歸藏', 'guizang-swiss', 'orange']
 ];
 
 /* ───── State + helpers ───── */
@@ -533,7 +571,7 @@ function applyStaticI18n(){
 
   // brand sub
   document.getElementById('brand-sub').innerHTML =
-    `${t.sub}<a href="${UPSTREAM_URL}" target="_blank" style="color:#8a90a4;text-decoration:underline">${t.forkLink}</a>`;
+    `${t.sub}Fork from <a href="${UPSTREAM_URL}" target="_blank" style="color:#8a90a4;text-decoration:underline">@lewislulu</a> & <a href="https://github.com/op7418/guizang-ppt-skill" target="_blank" style="color:#8a90a4;text-decoration:underline">@guizang</a>`;
 
   // install bar
   document.getElementById('install-bar').title = t.installTitle;
@@ -620,21 +658,38 @@ function render(){
       const [name,,,kind] = it;
       const label = deckLabel(it);
       const desc  = deckDesc(it);
-      promptText = t.promptDeck(name, label);
-      // Pass lang to deck iframe for forward-compat — templates can opt in via URLSearchParams
-      modalSrc   = {src: `full-decks/${name}/index.html?lang=${lang}`};
+      const author  = it[6] || '';       // 第7字段: 作者
+      const deckDir = it[7] || name;     // 第8字段: 实际目录名(缺省=id)
+      const themeKey= it[8] || '';       // 第9字段: URL ?theme= 参数值
+
+      // Guizang decks 用专用 prompt; 普通 deck 用 promptDeck
+      if(author && themeKey && t.promptGuizang){
+        promptText = t.promptGuizang(name, label, deckDir, themeKey);
+      }else{
+        promptText = t.promptDeck(name, label);
+      }
+
+      // iframe src: 带 theme 参数的指向实际目录
+      const iframeParams = new URLSearchParams();
+      iframeParams.set('lang', lang);
+      if(themeKey) iframeParams.set('theme', themeKey);
+      const iframeSrc = `full-decks/${deckDir}/index.html?${iframeParams}`;
+
+      modalSrc   = {src: iframeSrc};
       modalLabel = `${label} · ${name}`;
       card.innerHTML = `
         <button class="copy-btn" type="button">${t.copyPrompt}</button>
         <span class="zoom-hint">${t.zoomHint}</span>
         <div class="preview">
           <span class="badge ${kind}">${kind}</span>
-          <iframe src="full-decks/${name}/index.html?lang=${lang}" loading="lazy"></iframe>
+          <iframe src="${iframeSrc}" loading="lazy"></iframe>
         </div>
         <div class="meta">
           <p class="name">${label}</p>
           <p class="desc">${desc}</p>
-          <p class="id">templates/full-decks/${name}/</p>
+          ${author ? `<p class="author">by ${author}</p>` : `<p class="author">by Lewis</p>`}
+          <div class="feat">${author==='歸藏' ? `<span class="no">${t.featNoPresenter}</span>` : `<span class="yes">${t.featPresenter}</span>`}</div>
+          <p class="id">templates/full-decks/${deckDir}/</p>
         </div>`;
     }
 
@@ -677,11 +732,13 @@ function renderGuide(){
       <code>${INSTALL_CMD}</code>
       <button data-copy="${INSTALL_CMD}">${T().copy}</button>
     </div>
+    <p style="margin-top:10px;color:#8a90a4;font-size:13px">${t.terminalTip}</p>
     <div class="links">
       <a href="${REPO_URL}" target="_blank">${t.linkRepo}</a>
       <a href="${REPO_URL}/archive/refs/heads/main.zip">${t.linkZip}</a>
       <a href="${REPO_URL}/releases" target="_blank">${t.linkRelease}</a>
       <a href="${UPSTREAM_URL}" target="_blank">${t.linkUpstream}</a>
+      <a href="https://github.com/op7418/guizang-ppt-skill" target="_blank">${t.linkGuizang}</a>
     </div>
 
     <h2><span class="num">2</span>${t.h2}</h2>
